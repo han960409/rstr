@@ -10,8 +10,8 @@ import web.com.springweb.a00_prjdto.Restaurant;
 @Controller
 public class 함북스 {
 
-	
 	@Autowired
+    private RestaurantService restaurantService;
 	//  http://localhost:6805/home
 	@GetMapping("home")
 	public String home() {
@@ -26,18 +26,19 @@ public class 함북스 {
 	
 	//  http://localhost:6805/area
 	@GetMapping("area")
+	
 	public String area() {
 		return "a00_프로젝트/Area";
 	}
 	
 	// http://localhost:6805/king
-	@GetMapping("/king")
+    @GetMapping("/king")
     public String showRestaurant(Model model) {
-        Restaurant r = dao.getRestaurant();  // Dao 메서드 호출
-        model.addAttribute("restaurant", r); // 모델에 담아서 JSP에 전달
-        return "a00_프로젝트/review_king";             // JSP 이름
+        Restaurant r = restaurantService.getRestaurant();
+        model.addAttribute("restaurant", r);
+        return "a00_프로젝트/review_king";
     }
-
+    
 	//  http://localhost:6805/areaplus
 	@GetMapping("areaplus")
 	public String areaplus() {
