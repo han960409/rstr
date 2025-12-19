@@ -9,10 +9,10 @@ import web.com.springweb.a00_prjdto.Restaurant;
 public class RestaurantService {
 
     @Autowired
-    private Dao dao;  // ✅ static 제거
+    private Dao dao;  // 
 
-    // ✅ 인스턴스 메서드로 변경
-    public String getRestaurant() {
+  
+    public Restaurant getRestaurant() {
         return dao.getRestaurant();
     }
 
