@@ -1,4 +1,4 @@
-package web.com.springweb.project_4th;
+package web.com.springweb.A02_cjw;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

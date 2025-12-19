@@ -1,4 +1,4 @@
-package web.com.springweb.project_4th;
+package web.com.springweb.A02_cjw;
 
 public class RestaurantImg {
 	public int getId() {
