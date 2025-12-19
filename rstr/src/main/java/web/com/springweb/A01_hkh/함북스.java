@@ -12,25 +12,25 @@ public class 함북스 {
 
 	
 	@Autowired
-	//  http://localhost:5050/home
+	//  http://localhost:6805/home
 	@GetMapping("home")
 	public String home() {
 		return "a00_프로젝트/Home";
 	}
 	
-	//  http://localhost:5050/blog
+	//  http://localhost:6805/blog
 	@GetMapping("blog")
 	public String blog() {
 		return "a00_프로젝트/review_info";
 	}
 	
-	//  http://localhost:5050/area
+	//  http://localhost:6805/area
 	@GetMapping("area")
 	public String area() {
 		return "a00_프로젝트/Area";
 	}
 	
-	// http://localhost:5050/king
+	// http://localhost:6805/king
 	@GetMapping("/king")
     public String showRestaurant(Model model) {
         Restaurant r = dao.getRestaurant();  // Dao 메서드 호출
@@ -38,13 +38,13 @@ public class 함북스 {
         return "a00_프로젝트/review_king";             // JSP 이름
     }
 
-	//  http://localhost:5050/areaplus
+	//  http://localhost:6805/areaplus
 	@GetMapping("areaplus")
 	public String areaplus() {
 		return "a00_프로젝트/Areaplus";
 	}
 	
-	//  http://localhost:5050/list
+	//  http://localhost:6805/list
 	@GetMapping("list")
 	public String list() {
 		return "a00_프로젝트/Restaurant_list";
