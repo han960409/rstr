@@ -1,4 +1,4 @@
-package web.com.springweb.a00_prjdto;
+package web.com.rstr.common.dto;
 
 import java.time.LocalDateTime;
 

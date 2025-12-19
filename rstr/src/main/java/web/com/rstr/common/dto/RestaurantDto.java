@@ -1,8 +1,8 @@
-package web.com.springweb.A02_cjw;
+package web.com.rstr.common.dto;
 
 import java.time.LocalDateTime;
 
-public class restaurant {
+public class RestaurantDto {
     private int id;
     private String restaurantName;
     public int getId() {
@@ -59,7 +59,7 @@ public class restaurant {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	public restaurant(int id, String restaurantName, String operatingHours, String category, String address,
+	public RestaurantDto(int id, String restaurantName, String operatingHours, String category, String address,
 			String city, String phone, String description, LocalDateTime createdAt) {
 		super();
 		this.id = id;
@@ -79,7 +79,7 @@ public class restaurant {
     private String phone;                    
     private String description;
     private LocalDateTime createdAt;
-	public restaurant() {
+	public RestaurantDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

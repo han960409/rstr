@@ -1,33 +1,34 @@
-package web.com.springweb.A02_cjw;
+package web.com.rstr.cjw.restaurant;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+
 @Controller
-public class RSTR_Controller {
+public class RestaurantController {
 
     @Autowired
-    private RSTR_Service service;
-  	
-    // http://localhost:5050/restaurant/2
-    @GetMapping("/restaurant/2")
-    public String restaurant2(Model d) {
-        d.addAttribute("rstrName", service.findRstrNameById());
-        List<RestaurantImg> images = service.getRestaurantImages(2);
-        d.addAttribute("images", images); 
-        List<Menu> menus = service.getMenus(2);
-        d.addAttribute("menus", menus);
-        d.addAttribute("desc", service.getDesc());
-        d.addAttribute("open", service.getOpen());
-        d.addAttribute("num", service.getNum());
-        d.addAttribute("loc", service.getLoc());      
-        return "project_4th/Hambook_View";
+    private RestaurantService service;
+
+    // http://localhost:6805/restaurant/2
+    @GetMapping("/restaurant/{id}")
+    public String restaurantDetail(@PathVariable int id, Model d) {
+
+        d.addAttribute("rstrName", service.findRstrNameById(id));
+        d.addAttribute("images", service.getRestaurantImages(id));
+        d.addAttribute("menus", service.getMenus(id));
+        d.addAttribute("desc", service.getDesc(id));
+        d.addAttribute("open", service.getOpen(id));
+        d.addAttribute("num", service.getNum(id));
+        d.addAttribute("loc", service.getLoc(id));
+
+        return "hambook/restaurant-detail";
     }
     
     // http://localhost:5050/complete?id=1
