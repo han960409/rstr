@@ -1,4 +1,4 @@
-package web.com.springweb.A02_cjw;
+package web.com.rstr.cjw.restaurant;
 
 import java.sql.Timestamp;
 

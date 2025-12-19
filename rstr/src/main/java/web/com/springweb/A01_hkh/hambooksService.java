@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import web.com.springweb.a00_prjdto.Restaurant;
 
 @Service
-public class RestaurantService {
+public class hambooksService {
 
     @Autowired
     private Dao dao;  // ✅ static 제거

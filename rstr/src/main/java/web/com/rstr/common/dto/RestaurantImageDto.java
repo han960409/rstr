@@ -1,6 +1,6 @@
-package web.com.springweb.A02_cjw;
+package web.com.rstr.common.dto;
 
-public class RestaurantImg {
+public class RestaurantImageDto {
 	public int getId() {
 		return id;
 	}
@@ -25,14 +25,14 @@ public class RestaurantImg {
 	public void setSortOrder(int sortOrder) {
 		this.sortOrder = sortOrder;
 	}
-	public RestaurantImg(int id, int restaurantId, String imgUrl, int sortOrder) {
+	public RestaurantImageDto(int id, int restaurantId, String imgUrl, int sortOrder) {
 		super();
 		this.id = id;
 		this.restaurantId = restaurantId;
 		this.imgUrl = imgUrl;
 		this.sortOrder = sortOrder;
 	}
-	public RestaurantImg() {
+	public RestaurantImageDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
