@@ -1,4 +1,4 @@
-package web.com.springweb.project_4th;
+package web.com.springweb.A02_cjw;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
