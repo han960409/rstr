@@ -1,4 +1,4 @@
-package web.com.springweb.a00_prjmvc;
+package web.com.springweb.a00_A01_hkh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
