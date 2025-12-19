@@ -1,4 +1,4 @@
-package web.com.springweb.A01_hkh;
+package web.com.rstr.A01_hkh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +9,8 @@ import web.com.springweb.a00_prjdto.Restaurant;
 
 @Controller
 public class 함북스 {
-
 	@Autowired
-    private RestaurantService restaurantService;
+    private hambooksService restaurantService;
 	//  http://localhost:6805/home
 	@GetMapping("home")
 	public String home() {
@@ -38,7 +37,6 @@ public class 함북스 {
         model.addAttribute("restaurant", r);
         return "a00_프로젝트/review_king";
     }
-    
 	//  http://localhost:6805/areaplus
 	@GetMapping("areaplus")
 	public String areaplus() {

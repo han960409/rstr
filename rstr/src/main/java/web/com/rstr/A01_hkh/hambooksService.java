@@ -1,4 +1,4 @@
-package web.com.springweb.A01_hkh;
+package web.com.rstr.A01_hkh;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import web.com.springweb.a00_prjdto.Restaurant;
 
 @Service
-public class RestaurantService {
+public class hambooksService {
 
     @Autowired
     private Dao dao;  // 
@@ -15,6 +15,7 @@ public class RestaurantService {
     public Restaurant getRestaurant() {
         return dao.getRestaurant();
     }
+
 
 }
 

@@ -98,7 +98,7 @@
 	<div class="d-flex align-items-center justify-content-end flex-grow-1">
 		<div class="text-black d-flex align-items-center justify-content-center"
 		     style="width:50px; height:100%;">
-			등수
+			1등
 		</div>
 	</div>
 
@@ -149,7 +149,7 @@
 			
 			<div class="bg-info text-white text-center p-2 mb-1"
 			     style="width:200px;">
-				${restaurantName}
+				${restaurant.restaurantName}
 			</div>
 			
 			<div class="d-flex" style="width:200px;">
