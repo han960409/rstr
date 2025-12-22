@@ -29,18 +29,8 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min_styles.css" rel="stylesheet" />
 </head>
 <style>
-.review-box{
-	display:flex;
-	align-items:center;      /* 세로 가운데 */
-	justify-content:center;  /* 가로 가운데 (원하면) */
-	height:100%;
-}
 
-.review-text{
-	font-size:14px;
-	line-height:1.5;
-	text-align:center; /* 글자 가운데 (원하면) */
-}
+
 </style>
 <body>
 <header>
@@ -75,414 +65,70 @@
 </nav>
 </header>
 <div class="content-wrap">
-	<div class="card">
-		<img src="${pageContext.request.contextPath}/resources/images/왕관.jpg"  style=" margin:0 auto; width:50px; height:50px;">
-		<div class="card-body" style=" margin:0 auto;">리뷰 명예의 전당</div>
-	</div>
-	
-	<ul class="list-group" style="width:90%; margin:0 auto;">
-
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
+<div class="d-flex flex-column align-items-center">
+<div class="card" style="border:none;">
+		<!-- <img src="${pageContext.request.contextPath}/resources/images/왕관.jpg"  style=" margin:0 auto; width:50px; height:50px;">  -->
+		<h1 class="card-body" style=" margin:0 auto; margin-top:30px;">리뷰 명예의 전당</h1>
 </div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
+<div class="d-flex justify-content mb-3" style="width:90%; margin-top:30px; align-items:left;">
+  <a href="${pageContext.request.contextPath}/king?sort=like"
+     class="btn btn-outline-dark me-2
+     ${sort eq 'like' ? 'active' : ''}">
+    🔥 공감 많은 순
+  </a>
 
-		<div class="bg-info text-white text-center mb-1">
-			<img src="${pageContext.request.contextPath}/resources/images/치킨.jpg" style="width:120px; height:120px;">
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			치킨
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
+  <a href="${pageContext.request.contextPath}/king?sort=latest"
+     class="btn btn-outline-dark
+     ${sort eq 'latest' ? 'active' : ''}">
+    🕒 오픈 최신 순
+  </a>
 </div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				${restaurantName}
-			</div>
-			
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천하기</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-
+<ul class="list-group" style="width:90%; margin-bottom:35px;margin:0 auto;">
+<c:forEach var="r" items="${rstrList}" varStatus="status" begin="0" end="4">
+  <li class="list-group-item">
+    <!-- 카드 안 flex 배치: 리뷰 | 기본 정보 | 이미지 -->
+    <div class="d-flex align-items-start">
+      
+
+      
+      <!-- 2. 기본 정보 영역 (중간) -->
+      <div class="flex-grow-1 me-3">
+        <div style="font-size:20px;">🏆 ${status.index + 1}위</div>
+        <div>👍 ${r.receiveRecommend}</div>
+        <div style="font-size:20px;">${r.restaurantName}</div>
+        <div>🕧 영업시간 : ${r.operatingHours}</div>
+        <div>🚩 ${r.address}</div>
+      </div>
+            <!-- 1. 리뷰 영역 (왼쪽) -->
+      <div class="review-area me-3" style="width:40%;">
+        <c:set var="reviews" value="${reviewMap[r.id]}" />
+        <c:forEach var="rv" items="${reviews}" end="0">
+        	<div>
+        	<img src="${pageContext.request.contextPath}${rv.pfImage}" style="width:30px;height:30px;border-radius:100%">
+        	${rv.userId} 고객님의 리뷰
+        	</div>
+          <div class="p-2 mb-2 rounded">
+            <div class="fw-semibold small mb-1">💬 간략 리뷰</div>
+            <div class="small text-secondary">
+              ${rv.body} <span class="text-success"></span>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+      <!-- 3. 이미지 영역 (오른쪽) -->
+      <div>
+        <img src="${pageContext.request.contextPath}${r.imagePath}"
+             alt="식당 이미지"
+             style="width:300px; height:150px; object-fit:cover;">
+      </div>
+      
+    </div>
+  </li>
+</c:forEach>
 </ul>
+</div>
+</div>
+
 </div>
 
 
@@ -503,7 +149,29 @@
 
 <!-- Core theme JS -->
 <script src="${pageContext.request.contextPath}/js/H_scripts.js"></script>
+<script>
+  function sortByLike() {
+    const list = document.querySelector(".list-group");
+    const items = Array.from(list.children);
 
+    items.sort((a, b) => {
+      return b.dataset.like - a.dataset.like;
+    });
+
+    items.forEach(item => list.appendChild(item));
+  }
+
+  function sortByDate() {
+    const list = document.querySelector(".list-group");
+    const items = Array.from(list.children);
+
+    items.sort((a, b) => {
+      return new Date(b.dataset.date) - new Date(a.dataset.date);
+    });
+
+    items.forEach(item => list.appendChild(item));
+  }
+</script>
 </body>
 </html>
 

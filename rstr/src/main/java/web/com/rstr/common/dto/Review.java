@@ -17,9 +17,15 @@ public class Review {
 	@DecimalMin("0.5")
 	@DecimalMax("5.0")
 	private BigDecimal rating;
-	public Review() {}
+	private int receive_recommend;
+	private String pfImage;
+	public Review() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Review(int id, String title, String body, int restaurantId, int userId, int userVisitId,
-			LocalDateTime timeStamp, BigDecimal rating) {
+			LocalDateTime timeStamp, @DecimalMin("0.5") @DecimalMax("5.0") BigDecimal rating, int receive_recommend,
+			String pfImage) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -29,6 +35,8 @@ public class Review {
 		this.userVisitId = userVisitId;
 		this.timeStamp = timeStamp;
 		this.rating = rating;
+		this.receive_recommend = receive_recommend;
+		this.pfImage = pfImage;
 	}
 	public int getId() {
 		return id;
@@ -77,6 +85,18 @@ public class Review {
 	}
 	public void setRating(BigDecimal rating) {
 		this.rating = rating;
+	}
+	public int getReceive_recommend() {
+		return receive_recommend;
+	}
+	public void setReceive_recommend(int receive_recommend) {
+		this.receive_recommend = receive_recommend;
+	}
+	public String getPfImage() {
+		return pfImage;
+	}
+	public void setPfImage(String pfImage) {
+		this.pfImage = pfImage;
 	}
 	
 }

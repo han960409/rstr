@@ -1,1 +1,1 @@
-{"resources":{"src/main/webapp/WEB-INF/views/a00_프로젝트/햄북스.sql":{"default-datasource":"oracle_thin-19b25484171-44b18dc22d6f500e","default-schema":"PRJ01"}}}
+{"resources":{"src/main/webapp/WEB-INF/views/a00_프로젝트/햄북스.sql":{"default-schema":"PRJ01","default-datasource":"oracle_thin-19b25484171-44b18dc22d6f500e"},"src/main/webapp/WEB-INF/views/hambook/햄북스.sql":{"default-datasource":"oracle_thin-19b35a1a688-1e64d26c548a9cf4","default-schema":"PRJ01"}}}
