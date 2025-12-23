@@ -29,7 +29,34 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min_styles.css" rel="stylesheet" />
 </head>
 <style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* 위쪽에 표시 */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 
 </style>
 <body>
@@ -73,13 +100,13 @@
 <div class="d-flex justify-content mb-3" style="width:90%; margin-top:30px; align-items:left;">
   <a href="${pageContext.request.contextPath}/king?sort=like"
      class="btn btn-outline-dark me-2
-     ${sort eq 'like' ? 'active' : ''}">
+     ${sort eq 'like' ? 'active' : ''}" title="공감이 많은 순으로 정렬합니다.">
     🔥 공감 많은 순
   </a>
 
   <a href="${pageContext.request.contextPath}/king?sort=latest"
      class="btn btn-outline-dark
-     ${sort eq 'latest' ? 'active' : ''}">
+     ${sort eq 'latest' ? 'active' : ''}" title="오픈 최신 순으로 정렬합니다.">
     🕒 오픈 최신 순
   </a>
 </div>
@@ -171,6 +198,10 @@
 
     items.forEach(item => list.appendChild(item));
   }
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
 </script>
 </body>
 </html>
