@@ -24,6 +24,24 @@
     <link href="${pageContext.request.contextPath}/css/B_styles.css" rel="stylesheet" />
     
 </head>
+<style>
+.thumb-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.thumb-img:hover {
+    opacity: 1;
+}
+
+.active-thumb {
+    border: 2px solid #0d6efd;
+    opacity: 1;
+}
+</style>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,8 +57,8 @@
                 </div>
             </div>
         </nav>
-        <!-- Page content-->
-        <div class="container mt-5">
+
+<div class="container mt-5">
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Post content-->
@@ -48,23 +66,75 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">함 북 스!!</h1>
+                            <h1 class="fw-bolder mb-1">리뷰 제목</h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">Posted on January 1, 2023 by Start Bootstrap</div>
+                            <div class="text-muted fst-italic mb-2">작성자 : </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그1</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그2</a>
                         </header>
                         <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
-                        <!-- Post content-->
-                        <section class="mb-5">
-                            <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe.</p>
-                            <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                            <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                            <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>
-                            <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
-                            <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
+                        <!-- Page content-->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <div class="carousel-item active text-center">
+      <img src="${pageContext.request.contextPath}/resources/images/la.jpg"
+           class="d-block mx-auto img-fluid"
+           alt="Los Angeles">
+    </div>
+    <div class="carousel-item text-center">
+      <img src="${pageContext.request.contextPath}/resources/images/chicago.jpg"
+           class="d-block mx-auto img-fluid"
+           alt="Chicago">
+    </div>
+    <div class="carousel-item text-center">
+      <img src="${pageContext.request.contextPath}/resources/images/ny.jpg"
+           class="d-block mx-auto img-fluid"
+           alt="New York">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button"
+          data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button"
+          data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+<!-- Thumbnail navigation -->
+<div class="d-flex justify-content-center mt-3 gap-2">
+
+  <img src="${pageContext.request.contextPath}/resources/images/la.jpg"
+       class="img-thumbnail thumb-img active-thumb"
+       data-bs-target="#demo" data-bs-slide-to="0">
+
+  <img src="${pageContext.request.contextPath}/resources/images/chicago.jpg"
+       class="img-thumbnail thumb-img"
+       data-bs-target="#demo" data-bs-slide-to="1">
+
+  <img src="${pageContext.request.contextPath}/resources/images/ny.jpg"
+       class="img-thumbnail thumb-img"
+       data-bs-target="#demo" data-bs-slide-to="2">
+
+</div>
+<!-- Post content-->
+<section class="mb-5">
+<p class="fs-5 mb-4">body 위치</p>
+
                         </section>
                     </article>
                     <!-- Comments section-->
@@ -72,28 +142,28 @@
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
-                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="로그인 후 댓글 작성이 가능합니다."></textarea></form>
                                 <!-- Comment with nested comments-->
                                 <div class="d-flex mb-4">
                                     <!-- Parent comment-->
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                        <div class="fw-bold">닉네임</div>
+                                        댓글
                                         <!-- Child comment 1-->
                                         <div class="d-flex mt-4">
                                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                             <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                            </div>
+                                                <div class="fw-bold">닉네임</div>
+                                                대댓글
+                                                </div>
                                         </div>
                                         <!-- Child comment 2-->
                                         <div class="d-flex mt-4">
                                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                             <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When you put money directly to a problem, it makes a good headline.
+                                                <div class="fw-bold">닉네임</div>
+                                                대댓글
                                             </div>
                                         </div>
                                     </div>
@@ -102,8 +172,8 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                        <div class="fw-bold">닉네임</div>
+                                        댓글
                                     </div>
                                 </div>
                             </div>
@@ -114,31 +184,31 @@
                 <div class="col-lg-4">
                     <!-- Search widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Search</div>
+                        <div class="card-header">검색</div>
                         <div class="card-body">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <input class="form-control" type="text" placeholder="검색 할 내용을 입력하세요." aria-label="Enter search term..." aria-describedby="button-search" />
                                 <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                             </div>
                         </div>
                     </div>
                     <!-- Categories widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Categories</div>
+                        <div class="card-header">리뷰의 가게 정보</div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
+                                        <li>Web Design</a></li>
+                                        <li>HTML</a></li>
+                                        <li>Freebies</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
+                                        <li>JavaScript</a></li>
+                                        <li>CSS</a></li>
+                                        <li>Tutorials</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -161,4 +231,13 @@
         <!-- Core theme JS-->
         <script src="js/B_scripts.js"></script>
     </body>
+    <script>
+const carousel = document.getElementById('demo');
+const thumbs = document.querySelectorAll('.thumb-img');
+
+carousel.addEventListener('slid.bs.carousel', function (e) {
+    thumbs.forEach(t => t.classList.remove('active-thumb'));
+    thumbs[e.to].classList.add('active-thumb');
+});
+</script>
 </html>

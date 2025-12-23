@@ -26,12 +26,19 @@ String getLoc();
 */
 ALTER TABLE REVIEW
 ADD PF_IMAGE VARCHAR2(50);
-UPDATE review
-SET BODY = '바삭해요. 후라이드 치킨 튀김옷이 살아 숨쉬는 줄 알았습니다.'
-WHERE ID = 4;
-SELECT * FROM RESTAURANT ORDER BY RECEIVE_RECOMMEND DESC;
+UPDATE REVIEW
+SET ID = 6,
+	TITLE = '해장국 대박',
+    BODY = '해장국 한 그릇 먹고 어제 마신 술이 싹 내려갔어요!',
+    RESTAURANT_ID = 6,
+    USER_ID = 6,
+    CREATED_AT = SYSDATE,
+    RECEIVE_RECOMMEND = 63
+WHERE id = '6';
+INSERT INTO REVIEW
+			   VALUES ('16', '바삭 돈까스', '여태까지 먹은 돈까스는 가짜였어요!', '16', '16','' ,'5',SYSDATE, 592,'','');
 SELECT * FROM RESTAURANT;
-SELECT * FROM REVIEW WHERE RESTAURANT_ID = 4;
+SELECT * FROM REVIEW;
 SELECT * FROM REVIEW WHERE restaurant_Id = 1;
 SELECT r.id,
        r.restaurant_name,
