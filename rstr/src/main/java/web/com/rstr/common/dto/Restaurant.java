@@ -14,13 +14,15 @@ public class Restaurant {
     private LocalDateTime createdAt;
     private int receiveRecommend;
     private String imagePath;
+    private double latitude;
+    private double longitude;
 	public Restaurant() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Restaurant(int id, String restaurantName, String operatingHours, String category, String address,
 			String city, String phone, String description, LocalDateTime createdAt, int receiveRecommend,
-			String imagePath) {
+			String imagePath, double latitude, double longitude) {
 		super();
 		this.id = id;
 		this.restaurantName = restaurantName;
@@ -33,6 +35,20 @@ public class Restaurant {
 		this.createdAt = createdAt;
 		this.receiveRecommend = receiveRecommend;
 		this.imagePath = imagePath;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public int getId() {
 		return id;

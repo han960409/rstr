@@ -26,14 +26,11 @@ String getLoc();
 */
 ALTER TABLE REVIEW
 ADD PF_IMAGE VARCHAR2(50);
-UPDATE REVIEW
-SET ID = 6,
-	TITLE = '해장국 대박',
-    BODY = '해장국 한 그릇 먹고 어제 마신 술이 싹 내려갔어요!',
-    RESTAURANT_ID = 6,
-    USER_ID = 6,
-    CREATED_AT = SYSDATE,
-    RECEIVE_RECOMMEND = 63
+UPDATE RESTAURANT
+SET latitude = 37.28648227941,
+	longitude = 127.01261281897
+WHERE id = 1;
+
 WHERE id = '6';
 INSERT INTO REVIEW
 			   VALUES ('16', '바삭 돈까스', '여태까지 먹은 돈까스는 가짜였어요!', '16', '16','' ,'5',SYSDATE, 592,'','');
@@ -51,6 +48,8 @@ WHERE r.id = 1;
 LEFT JOIN review rv ON r.id = rv.restaurant_id WHERE r.id = #{r.id};")
 List<review> getReviewList();
 */
+ALTER TABLE restaurant
+ADD longitude NUMBER;
 DELETE FROM review
 WHERE id = 26;
 /*

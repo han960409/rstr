@@ -1,6 +1,9 @@
 package web.com.rstr.A01_hkh;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,23 +15,35 @@ import web.com.rstr.common.dto.Review;
 public class hambooksService {
 
     @Autowired
-    private Dao dao;  // 
+    private Dao dao;
 
-  
-    public Restaurant getRestaurant() {
-        return dao.getRestaurant();
+    /* ⭐ 식당별 대표 리뷰 Map */
+    public Map<Integer, Review> getTopReviewMap(List<Integer> restaurantIds) {
+
+        String ids = restaurantIds.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+
+        List<Review> reviews =
+                dao.findTopReviewByRestaurantIds(ids);
+
+        Map<Integer, Review> reviewMap = new HashMap<>();
+        for (Review r : reviews) {
+            reviewMap.put(r.getRestaurantId(), r);
+        }
+        return reviewMap;
     }
-	public List<Restaurant> getRstrDesc(){
-		return dao.getRstrDesc();
-	}
 
-	public List<Restaurant> getRstrLatest() {
-	    return dao.getOrderByCreatedAtDesc();
-	}
-    public List<Review> getReviewListById(int restaurantId) {
-        return dao.getReviewListById(restaurantId);
+    /* 최신순 */
+    public List<Restaurant> getRstrLatest() {
+        return dao.getOrderByCreatedAtDesc();
+    }
+
+    /* 🔥 공감 많은 순 */
+    public List<Restaurant> getRstrDesc() {
+        return dao.getOrderByRecommendDesc();
+    }
+    public List<Restaurant> getAllRestaurants() {
+        return dao.getAllRestaurants();
     }
 }
-
-	
-

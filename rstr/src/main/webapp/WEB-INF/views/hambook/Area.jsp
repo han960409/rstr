@@ -26,6 +26,11 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min_styles.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <style>
+#map {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+}
     .map-container {
         width: 100%;
         max-width: 550px;
@@ -112,67 +117,9 @@
      </div>
 </nav>
 </header>
-<div class="map-container">
-    <h2 style="margin-bottom:30px; color:#333;">✔지역을 선택해 주세요.✔</h2>
-    
-    <svg class="korea-map" viewBox="0 0 440 680" xmlns="http://www.w3.org/2000/svg">
-
-        <a href="${pageContext.request.contextPath}/areaplus" class="region-group">
-            <path class="region-path" fill="#E1BEE7" 
-                  d="M135,145 L160,120 L190,115 L220,125 L230,165 L220,200 L180,215 L150,225 L120,205 L110,170 Z" />
-            <text x="170" y="175" class="region-label">경기/서울</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#B2EBF2" 
-                  d="M220,125 L240,60 L290,40 L310,100 L330,180 L280,200 L250,190 L230,165 Z" />
-            <text x="270" y="130" class="region-label">강원도</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#DCEDC8" 
-                  d="M230,165 L250,190 L280,200 L290,230 L260,260 L230,245 L220,200 Z" />
-            <text x="250" y="225" class="region-label">충북</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFF9C4" 
-                  d="M120,205 L150,225 L180,215 L220,200 L230,245 L210,270 L160,260 L130,230 Z" />
-            <text x="175" y="245" class="region-label">충남/대전</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFCDD2" 
-                  d="M280,200 L330,180 L360,270 L380,300 L330,340 L290,320 L260,260 L290,230 Z" />
-            <text x="320" y="260" class="region-label">경북/대구</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#BBDEFB" 
-                  d="M160,260 L210,270 L230,245 L260,260 L280,310 L220,340 L150,320 L140,290 Z" />
-            <text x="200" y="300" class="region-label">전북/광주</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#F8BBD0" 
-                  d="M280,310 L290,320 L330,340 L380,300 L370,390 L310,400 L270,360 Z" />
-            <text x="320" y="360" class="region-label">경남/부산/울산</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFE0B2" 
-                  d="M150,320 L220,340 L280,310 L270,360 L310,400 L250,450 L140,430 L110,380 Z" />
-            <text x="200" y="390" class="region-label">전남</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#B2DFDB" 
-                  d="M150,540 L230,530 L250,560 L190,580 L140,560 Z" />
-            <text x="195" y="560" class="region-label">제주</text>
-        </a>
-
-    </svg>
-</div>
+<br>
+<h2 style="text-align:center;">현재 지역의 맛집🍖🍖<h2>
+<div id="map" style="width:70%; height:600px;  margin:50px auto; border:5px solid black; align-items:center;"></div>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -188,5 +135,47 @@
 <!-- Core theme JS -->
 <script src="${pageContext.request.contextPath}/js/H_scripts.js"></script>
 
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1cb3f6f3ef7608356132050b83e29124&autoload=false"></script>
+<!-- 카카오 지도 SDK (먼저!) -->
+<script>
+const restaurants = [
+<c:forEach var="r" items="${restaurants}" varStatus="status">
+{
+    id: ${r.id},
+    name: "${r.restaurantName}",
+    lat: ${r.latitude},
+    lng: ${r.longitude}
+} <c:if test="${!status.last}">,</c:if>
+</c:forEach>
+];
+
+kakao.maps.load(function() {
+    const mapContainer = document.getElementById('map');
+    const mapOption = {
+        center: new kakao.maps.LatLng(37.2750, 127.0160), // 초기 중심
+        level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 여러 마커 생성
+    restaurants.forEach(r => {
+        const marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(r.lat, r.lng),
+            title: r.name
+        });
+
+        // 마커 클릭 → 상세 페이지 이동
+        kakao.maps.event.addListener(marker, 'click', () => {
+        	location.href = "${pageContext.request.contextPath}/restaurant/detail?id=" + r.id;
+        });
+    });
+});
+</script>
+<!-- 지도 생성 스크립트 -->
+
 </body>
+
+
+
 </html>
