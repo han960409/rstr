@@ -1,5 +1,6 @@
 package web.com.rstr.A01_hkh;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.com.rstr.common.dto.Restaurant;
@@ -18,7 +20,7 @@ public class 함북스 {
 
 
     @Autowired
-    private hambooksService hambooksService;     // ✅ 리뷰 전용
+    private hambooksService hambooksService;
 
     // http://localhost:6805/home
     @GetMapping("home")
@@ -26,24 +28,58 @@ public class 함북스 {
         return "hambook/Home";
     }
 
-    // http://localhost:6805/blog
-    @GetMapping("blog")
-    public String blog() {
+ // http://localhost:6805/blog
+    @GetMapping("/blog")
+    public String blog(Model model) {
+
+        // 리뷰 ID 1~5만 조회
+        List<Review> reviews = hambooksService.getReviewsIdBetween1And5();
+        for (Review review : reviews) {
+            if (review.getReviewImage() != null && !review.getReviewImage().isEmpty()) {
+            	review.setReviewImageList(
+            		    Arrays.asList(review.getReviewImage().split(","))
+            		);
+            }
+        }
+        model.addAttribute("reviews", reviews);
+
         return "hambook/review_info";
     }
+    // http://localhost:6805/review/restaurant/1
+    @GetMapping("/review/restaurant/{restaurantId}")
+    public String reviewByRestaurant(
+            @PathVariable int restaurantId,
+            Model model) {
 
+        // 식당 정보
+        Restaurant restaurant =
+                hambooksService.getRestaurantById(restaurantId);
+
+        // 해당 식당의 리뷰 목록
+        List<Review> reviews =
+                hambooksService.getReviewsByRestaurantId(restaurantId);
+        // ⭐⭐⭐ 이 부분 추가 ⭐⭐⭐
+        for (Review review : reviews) {
+            if (review.getReviewImage() != null &&
+                !review.getReviewImage().isEmpty()) {
+
+                review.setReviewImageList(
+                    Arrays.asList(review.getReviewImage().split(","))
+                );
+            }
+        }
+
+        model.addAttribute("restaurant", restaurant);
+        model.addAttribute("reviews", reviews);
+
+        return "hambook/review_info";
+    }
     // http://localhost:6805/area
     @GetMapping("/area")
     public String showMap(Model model) {
         List<Restaurant> restaurants = hambooksService.getAllRestaurants();
         model.addAttribute("restaurants", restaurants);
         return "hambook/Area"; // area.jsp
-    }
-    @GetMapping("/restaurant/detail")
-    public String detail(@RequestParam int id, Model model) {
-        Restaurant r = dao.findById(id);
-        model.addAttribute("restaurant", r);
-        return "hambook/detail";  // 상세 페이지 JSP가 들어가야 함.
     }
 
     // http://localhost:6805/king?sort=like

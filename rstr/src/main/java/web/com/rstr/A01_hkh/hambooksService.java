@@ -1,5 +1,6 @@
 package web.com.rstr.A01_hkh;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,4 +47,29 @@ public class hambooksService {
     public List<Restaurant> getAllRestaurants() {
         return dao.getAllRestaurants();
     }
+    public List<Review> getReviewsIdBetween1And5() {
+        return dao.selectIdBetween1And5();
+    }
+    public Restaurant getRestaurantById(int id) {
+        return dao.findById(id);
+    }
+    public Review getReviewById(int id) {
+
+        Review review = dao.findReviewById(id);
+
+        if (review != null
+            && review.getReviewImage() != null
+            && !review.getReviewImage().isEmpty()) {
+
+            review.setReviewImageList(
+                Arrays.asList(review.getReviewImage().split(","))
+            );
+        }
+
+        return review;
+    }
+    public List<Review> getReviewsByRestaurantId(int restaurantId) {
+        return dao.findReviewsByRestaurantId(restaurantId);
+    }
+    
 }

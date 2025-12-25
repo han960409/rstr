@@ -237,9 +237,14 @@
 
     <!-- 왼쪽: 식당 정보 -->
     <div class="info-area">
-      <div class="rank">🏆 ${status.index + 1}위</div>
-      <div>👍 ${r.receiveRecommend}</div>
-      <div class="name">${r.restaurantName}</div>
+    <div class="rank">🏆 ${status.index + 1}위</div>
+    <div>👍 ${r.receiveRecommend}</div>
+    <div class="name">
+  			<a href="${pageContext.request.contextPath}/review/restaurant/${r.id}"
+     			style="text-decoration:none; color:inherit;">
+    			${r.restaurantName}
+ 			 </a>
+	</div>
       <div>🕧 ${r.operatingHours}</div>
       <div>🚩 ${r.address}</div>
     </div>

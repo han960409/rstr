@@ -46,11 +46,11 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="home"><img src="${pageContext.request.contextPath}resources/images/hambooks.png" width="180px" height="60px"></a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="60px"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="blog">review_info</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}">리뷰 상세 페이지</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#">로그인</a>
                 </li>
                     </ul>
@@ -62,81 +62,74 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Post content-->
-                    <article>
+                    <c:forEach var="review" items="${reviews}">
+                    <article class="mb-5 border-bottom pb-4">
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">리뷰 제목</h1>
+                            <h1 class="fw-bolder mb-1">${review.title}</h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">작성자 : </div>
+                            <div class="text mb-2">작성자 : ${review.userId} | 평점 : ${review.rating}</div>
                             <!-- Post categories-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그1</a>
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그2</a>
                         </header>
                         <!-- Preview image figure-->
                         <!-- Page content-->
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+<c:if test="${not empty review.reviewImageList}">
+<div id="demo${review.id}" class="carousel slide" data-bs-ride="carousel">
 
   <!-- Indicators -->
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
+      <button type="button"
+              data-bs-target="#demo${review.id}"
+              data-bs-slide-to="${status.index}"
+              class="${status.first ? 'active' : ''}">
+      </button>
+    </c:forEach>
   </div>
 
   <!-- Slides -->
   <div class="carousel-inner">
-    <div class="carousel-item active text-center">
-      <img src="${pageContext.request.contextPath}/resources/images/la.jpg"
-           class="d-block mx-auto img-fluid"
-           alt="Los Angeles">
-    </div>
-    <div class="carousel-item text-center">
-      <img src="${pageContext.request.contextPath}/resources/images/chicago.jpg"
-           class="d-block mx-auto img-fluid"
-           alt="Chicago">
-    </div>
-    <div class="carousel-item text-center">
-      <img src="${pageContext.request.contextPath}/resources/images/ny.jpg"
-           class="d-block mx-auto img-fluid"
-           alt="New York">
-    </div>
+    <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
+      <div class="carousel-item ${status.first ? 'active' : ''} text-center">
+        <img src="${pageContext.request.contextPath}${img}"
+             class="d-block mx-auto img-fluid">
+      </div>
+    </c:forEach>
   </div>
 
   <!-- Controls -->
   <button class="carousel-control-prev" type="button"
-          data-bs-target="#demo" data-bs-slide="prev">
+          data-bs-target="#demo${review.id}" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </button>
 
   <button class="carousel-control-next" type="button"
-          data-bs-target="#demo" data-bs-slide="next">
+          data-bs-target="#demo${review.id}" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </button>
 
 </div>
+
 <!-- Thumbnail navigation -->
 <div class="d-flex justify-content-center mt-3 gap-2">
-
-  <img src="${pageContext.request.contextPath}/resources/images/la.jpg"
-       class="img-thumbnail thumb-img active-thumb"
-       data-bs-target="#demo" data-bs-slide-to="0">
-
-  <img src="${pageContext.request.contextPath}/resources/images/chicago.jpg"
-       class="img-thumbnail thumb-img"
-       data-bs-target="#demo" data-bs-slide-to="1">
-
-  <img src="${pageContext.request.contextPath}/resources/images/ny.jpg"
-       class="img-thumbnail thumb-img"
-       data-bs-target="#demo" data-bs-slide-to="2">
-
+  <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
+    <img src="${pageContext.request.contextPath}${img}"
+         class="img-thumbnail thumb-img ${status.first ? 'active-thumb' : ''}"
+         data-bs-target="#demo${review.id}"
+         data-bs-slide-to="${status.index}">
+  </c:forEach>
 </div>
+</c:if>
 <!-- Post content-->
 <section class="mb-5">
-<p class="fs-5 mb-4">body 위치</p>
+<p class="fs-5 mb-4">${review.body}</p>
 
                         </section>
                     </article>
+                    </c:forEach>
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
@@ -192,28 +185,23 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">리뷰의 가게 정보</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li>Web Design</a></li>
-                                        <li>HTML</a></li>
-                                        <li>Freebies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li>JavaScript</a></li>
-                                        <li>CSS</a></li>
-                                        <li>Tutorials</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Categories widget-->
+<div class="card mb-4">
+    <div class="card-header">리뷰의 가게 정보</div>
+    <div class="card-body">
+        <div class="row">
+            <div>
+                <ul class="list-unstyled">
+                    <li>${restaurant.restaurantName}</li>
+                    <br>
+                    <li>🕕 영업시간 : ${restaurant.operatingHours}</li>
+                    <li>🚩 주소 : ${restaurant.address}</li>
+                    <li>📞 전화번호 : ${restaurant.phone}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Side Widget</div>

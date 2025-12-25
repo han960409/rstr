@@ -51,4 +51,21 @@ public interface Dao {
 		List<Restaurant> getOrderByRecommendDesc();
 	@Select("SELECT id, restaurant_name AS restaurantName, latitude, longitude FROM restaurant")
 	List<Restaurant> getAllRestaurants();
+	@Select("		    SELECT *\r\n"
+			+ "		    FROM review\r\n"
+			+ "		    WHERE id BETWEEN 1 AND 5\r\n"
+			+ "		    ORDER BY created_at DESC")
+		List<Review> selectIdBetween1And5();
+	
+    @Select("SELECT *\r\n"
+    		+ "            FROM RESTAURANT\r\n"
+    		+ "            WHERE ID = #{id}")
+        Restaurant findById(int id);
+    @Select("SELECT * FROM REVIEW WHERE id = #{id}")
+    Review findReviewById(int id);
+    @Select("SELECT *\r\n"
+    		+ "    	    FROM review\r\n"
+    		+ "    	    WHERE RESTAURANT_ID = #{restaurantId}\r\n"
+    		+ "    	    ORDER BY id DESC")
+    	List<Review> findReviewsByRestaurantId(int restaurantId);
 }
