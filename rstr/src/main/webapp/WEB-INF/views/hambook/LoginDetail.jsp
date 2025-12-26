@@ -243,7 +243,7 @@
 <header id="header">
     <div class="header-container">
         <a href="http://localhost:6805/home" class="logo">
-            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
+            <img src="/images/icon/logo.png" width="180px" height="50px">
         </a>
         
         <nav class="nav-menu">
@@ -296,7 +296,7 @@
                 <button type="submit" class="btn-login">로그인</button>
                 
                 <p class="signup-text">
-                    아직 회원이 아니신가요? <a href="http://localhost:6805/signup" class="signup-link">회원가입</a>
+                    아직 회원이 아니신가요? <a href="#" class="signup-link">회원가입</a>
                 </p>
             </form>
         </div>
