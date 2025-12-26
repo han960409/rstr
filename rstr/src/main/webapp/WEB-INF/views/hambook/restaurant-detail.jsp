@@ -197,7 +197,7 @@
 <body>
 <header id="header">
     <div class="header-container">
-        <a href="http://localhost:6805/login" class="logo"><img src = "/images/icon/logo.png" width = "180px" height = "50px"></a>
+        <a href="http://localhost:6805/home" class="logo"><img src = "/images/icon/logo.png" width = "180px" height = "50px"></a>
         
         <nav class="nav-menu">
             <a href="/" class="nav-link">
