@@ -15,39 +15,39 @@ public class 함북스 {
 	//  http://localhost:6805/home
 	@GetMapping("home")
 	public String home() {
-		return "a00_프로젝트/Home";
+		return "hambook/Home";
 	}
 	
 	//  http://localhost:6805/blog
 	@GetMapping("blog")
 	public String blog() {
-		return "a00_프로젝트/review_info";
+		return "hambook/review_info";
 	}
 	
 	//  http://localhost:6805/area
 	@GetMapping("area")
 	
 	public String area() {
-		return "a00_프로젝트/Area";
+		return "hambook/Area";
 	}
 	
 	// http://localhost:6805/king
-    @GetMapping("/king")
+    @GetMapping("king")
     public String showRestaurant(Model model) {
         Restaurant r = restaurantService.getRestaurant();
         model.addAttribute("restaurant", r);
-        return "a00_프로젝트/review_king";
+        return "hambook/review_king";
     }
     
 	//  http://localhost:6805/areaplus
 	@GetMapping("areaplus")
 	public String areaplus() {
-		return "a00_프로젝트/Areaplus";
+		return "hambook/Areaplus";
 	}
 	
 	//  http://localhost:6805/list
 	@GetMapping("list")
 	public String list() {
-		return "a00_프로젝트/Restaurant_list";
+		return "hambook/Restaurant_list";
 	}
 }
