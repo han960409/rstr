@@ -7,14 +7,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약 완료</title>
+    <title>예약 완료 - HamBooks</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 180px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #f97316;
+        }
+
+        .nav-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                height: 64px;
+            }
+            .logo img {
+                width: 140px;
+                height: 40px;
+            }
+            .nav-menu {
+                gap: 1rem;
+            }
+            .nav-link {
+                gap: 0.25rem;
+                font-size: 0.875rem;
+            }
+            .nav-link svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, #F07030 0%, #FF8C5A 100%);
         }
         
         .main-content {
@@ -25,112 +107,397 @@
             padding: 2rem;
         }
         
-        .image-container {
+        .confirmation-card {
             background: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .success-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-icon svg {
+            width: 80px;
+            height: 80px;
+            color: #10b981;
+            animation: scaleIn 0.5s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .confirmation-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #F07030;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .confirmation-subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 1rem;
             margin-bottom: 2rem;
-            height: 340px;
+        }
+        
+        .reservation-info {
+            background: #f9fafb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .info-value {
+            color: #6b7280;
+            text-align: right;
+        }
+        
+        .highlight {
+            color: #F07030;
+            font-weight: 600;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-primary-custom {
+            flex: 1;
+            padding: 1rem;
+            background: #F07030;
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 0.5rem;
         }
         
-        .image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .btn-primary-custom:hover {
+            background: #D85A20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(240, 112, 48, 0.4);
         }
         
-        .btn-custom {
-            padding: 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
+        .btn-secondary-custom {
+            flex: 1;
+            padding: 1rem;
+            background: white;
+            color: #F07030;
+            border: 2px solid #F07030;
             border-radius: 0.75rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary-custom:hover {
+            background: #FFF5F0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(240, 112, 48, 0.2);
+        }
+        
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .notice-box {
+            background: #FFF5F0;
+            border-left: 4px solid #F07030;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .notice-title {
+            font-weight: 600;
+            color: #F07030;
+            margin-bottom: 0.5rem;
+        }
+        
+        .notice-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 공유 모달 스타일 */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-modal.active {
+            display: flex;
+        }
+
+        .share-content {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .share-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
             transition: all 0.2s;
         }
-        
-		.btn-confirm {
-		    background: #334155; /* 차콜 그레이 (단색) */
-		    color: white;
-		    border: none;
-		}
-		
-		.btn-confirm:hover {
-		    background: #1e293b; /* 더 어두운 블랙에 가까운 색 */
-		    color: white;
-		    transform: translateY(-2px);
-		    box-shadow: 0 6px 16px rgba(30, 41, 59, 0.4);
-		}
-        
-		.btn-invite {
-		    /* 깊은 밤하늘색 -> 짙은 보라빛 */
-		    background: linear-gradient(135deg, #4338ca 0%, #312e81 100%);
-		    color: white;
-		    border: none;
-		}
-		
-		.btn-invite:hover {
-		    background: linear-gradient(135deg, #3730a3 0%, #1e1b4b 100%);
-		    transform: translateY(-2px);
-		    box-shadow: 0 6px 16px rgba(49, 46, 129, 0.4);
-		}
+
+        .share-option:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+
+        .share-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .kakao { background: #FEE500; }
+        .facebook { background: #1877F2; color: white; }
+        .twitter { background: #1DA1F2; color: white; }
+        .link { background: #6B7280; color: white; }
+
+        .share-label {
+            font-size: 0.875rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .modal-close {
+            width: 100%;
+            padding: 0.75rem;
+            background: #e5e7eb;
+            color: #374151;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: #d1d5db;
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .share-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="/home">
-                    <img src="/upload/hambooks.png" width="180px" height="60px" alt="HamBooks">
+    <header id="header">
+        <div class="header-container">
+            <a href="http://localhost:6805/home" class="logo">
+                <img src="/images/icon/logo.png" width="180px" height="50px">
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="http://localhost:6805/home" class="nav-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span>Home</span>
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">로그인</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                <a href="http://localhost:6805/login" class="nav-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>Login</span>
+                </a>
+            </nav>
+        </div>
     </header>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <!-- 예약 완료 이미지 -->
-                    <div class="image-container">
-                        <img src="/upload/reserv.png" alt="예약 완료">
-                    </div>
-
-                    <!-- 버튼 영역 -->
-					<div class="row g-4">
-					    <div class="col-md-6">
-					        <a href="/reservations/${reservationId}" class="btn btn-custom btn-confirm w-100 d-flex align-items-center justify-content-center">
-					            📅 예약 확인
-					        </a>
-					    </div>
-					    <div class="col-md-6">
-					        <button class="btn btn-custom btn-invite w-100">
-					            ✉️ 초대장 보내기
-					        </button>
-					    </div>
-					</div>
+        <div class="confirmation-card">
+            <div class="success-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            
+            <h1 class="confirmation-title">예약이 완료되었습니다!</h1>
+            <p class="confirmation-subtitle">예약 정보를 확인해주세요</p>
+            
+            <div class="reservation-info">
+                <div class="info-row">
+                    <span class="info-label">예약번호</span>
+                    <span class="info-value highlight">HB-20251226-001</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">예약매장</span>
+                    <span class="info-value">함께하는 맛집</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">예약일시</span>
+                    <span class="info-value">2025년 12월 28일 오후 7:00</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">인원</span>
+                    <span class="info-value">4명</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">예약자명</span>
+                    <span class="info-value">홍길동</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">연락처</span>
+                    <span class="info-value">010-1234-5678</span>
                 </div>
             </div>
+            
+            <div class="button-group">
+                <button class="btn-primary-custom" onclick="checkReservation()">
+                    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    예약 확인
+                </button>
+                <button class="btn-secondary-custom" onclick="openShareModal()">
+                    <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    초대장 보내기
+                </button>
+            </div>
+            
+            <div class="notice-box">
+                <div class="notice-title">📌 예약 안내</div>
+                <div class="notice-text">
+                    • 예약 시간 10분 전까지 도착해주세요<br>
+                    • 예약 변경은 방문 24시간 전까지 가능합니다<br>
+                    • 노쇼 발생 시 향후 예약이 제한될 수 있습니다
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공유 모달 -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <h3 class="share-title">초대장 보내기</h3>
+            <div class="share-options">
+                <div class="share-option" onclick="shareKakao()">
+                    <div class="share-icon kakao">💬</div>
+                    <span class="share-label">카카오톡</span>
+                </div>
+                <div class="share-option" onclick="shareFacebook()">
+                    <div class="share-icon facebook">f</div>
+                    <span class="share-label">페이스북</span>
+                </div>
+                <div class="share-option" onclick="shareTwitter()">
+                    <div class="share-icon twitter">🐦</div>
+                    <span class="share-label">트위터</span>
+                </div>
+                <div class="share-option" onclick="copyLink()">
+                    <div class="share-icon link">🔗</div>
+                    <span class="share-label">링크 복사</span>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeShareModal()">닫기</button>
         </div>
     </div>
 
@@ -144,5 +511,120 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 예약 확인 페이지로 이동
+        function checkReservation() {
+            // 예약 번호를 가지고 예약 상세 페이지로 이동
+            window.location.href = '/reservation/detail?reservationNo=HB-20251226-001';
+        }
+
+        // 공유 모달 열기
+        function openShareModal() {
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        // 공유 모달 닫기
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        // 모달 외부 클릭시 닫기
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareModal();
+            }
+        });
+
+        // 카카오톡 공유
+        function shareKakao() {
+            // 카카오 SDK 초기화 (본인의 JavaScript 키로 교체 필요)
+            if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+                Kakao.init('YOUR_JAVASCRIPT_KEY'); // 본인의 카카오 JavaScript 키 입력
+            }
+            
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: 'HamBooks 예약 완료',
+                    description: '함께하는 맛집에서 만나요!\n일시: 2025년 12월 28일 오후 7:00\n인원: 4명',
+                    imageUrl: 'http://localhost:6805/images/icon/logo.png',
+                    link: {
+                        mobileWebUrl: 'http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001',
+                        webUrl: 'http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001'
+                    }
+                },
+                buttons: [
+                    {
+                        title: '예약 확인하기',
+                        link: {
+                            mobileWebUrl: 'http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001',
+                            webUrl: 'http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001'
+                        }
+                    }
+                ]
+            });
+        }
+
+        // 페이스북 공유
+        function shareFacebook() {
+            const url = encodeURIComponent('http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001');
+            const text = encodeURIComponent('함께하는 맛집 예약 완료! 2025년 12월 28일 오후 7:00에 만나요!');
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
+        }
+
+        // 트위터 공유
+        function shareTwitter() {
+            const url = encodeURIComponent('http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001');
+            const text = encodeURIComponent('함께하는 맛집 예약 완료! 2025년 12월 28일 오후 7:00에 만나요! #HamBooks #맛집예약');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+
+        // 링크 복사
+        function copyLink() {
+            const link = 'http://localhost:6805/reservation/detail?reservationNo=HB-20251226-001';
+            
+            // 클립보드 API 사용
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => {
+                    alert('링크가 복사되었습니다!');
+                    closeShareModal();
+                }).catch(err => {
+                    console.error('복사 실패:', err);
+                    fallbackCopyLink(link);
+                });
+            } else {
+                fallbackCopyLink(link);
+            }
+        }
+
+        // 클립보드 API를 지원하지 않는 브라우저를 위한 대체 방법
+        function fallbackCopyLink(link) {
+            const textarea = document.createElement('textarea');
+            textarea.value = link;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('링크가 복사되었습니다!');
+                closeShareModal();
+            } catch (err) {
+                alert('링크 복사에 실패했습니다. 수동으로 복사해주세요: ' + link);
+            }
+            document.body.removeChild(textarea);
+        }
+    </script>
 </body>
 </html>

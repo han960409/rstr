@@ -9,8 +9,78 @@
     <title>함북스>${rstrName}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    	header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+    }
+
+
+
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: #f97316;
+    }
+
+    .nav-link svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            height: 64px;
+        }
+
+        .nav-menu {
+            gap: 1rem;
+        }
+        .nav-link {
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
         body {
-            background-color: #f8f9fa;
+            background-color: #FFFFE9;
         }
         .main-image-box {
             background-color: #e9ecef;
@@ -125,36 +195,25 @@
     </style>
 </head>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand"
-           href="${pageContext.request.contextPath}/home">
-           <img src="/upload/hambooks.png"
-              width="180px" height="60px">
-        </a>
-
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/home">Home</a>
-                </li>
-
-                                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/">로그인</a>
-                </li>
-            </ul>
-        </div>
-     </div>
-</nav>
+<header id="header">
+    <div class="header-container">
+        <a href="http://localhost:6805/login" class="logo"><img src = "/images/icon/logo.png" width = "180px" height = "50px"></a>
+        
+        <nav class="nav-menu">
+            <a href="/" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="/login" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Login</span>
+            </a>
+        </nav>
+    </div>
 </header>
     
 <div class="container mt-4">
@@ -184,7 +243,7 @@
                 </div>
                 
  <div class="info-box">
-                    <h5 class="mb-4">🐹 메뉴</h5>
+                    <h5 class="mb-4"><img src ="\images\icon\메뉴 아이콘.png" width = "48px", height = "40px"> 메뉴</h5>
                     
                     <c:choose>
                         <c:when test="${not empty menus}">
@@ -283,7 +342,6 @@
             
             <div class="col-md-4">
                 <div class="info-box">
-                    <h5 class="mb-3">식당 설명</h5>
                     <p class="text-muted">
                         ${desc}
                     </p>
@@ -320,7 +378,7 @@
                 </div>
                 
                 <div class="info-box">
-                    <h5 class="mb-3">간편 예약</h5>
+                    <h5 class="mb-3"><img src ="\images\icon\예약 아이콘.png" width = "45px", height = "40px"> 간편 예약</h5>
                     
                     <div class="mb-3">
                         <label class="form-label">방문날짜</label>
@@ -397,6 +455,14 @@
             // 리뷰 수
             document.getElementById('reviewCount').textContent = reviews.length;
         }
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         
         // 페이지 로드 시 실행
         // updateReviewStats();

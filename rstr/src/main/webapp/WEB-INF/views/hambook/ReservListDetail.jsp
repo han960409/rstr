@@ -417,14 +417,14 @@
                                 <tbody>
                                     <tr class="medicine-row">
                                         <td><img src="https://via.placeholder.com/60" alt="가게" width="60" height="60"></td>
-                                        <td style="font-weight: 600; color: #212529;">서울약국</td>
+                                        <td style="font-weight: 600; color: #212529;">츄플러스</td>
                                         <td>강남점</td>
                                         <td>2025-12-20 14:00</td>
                                         <td><button class="btn-cancel" onclick="showCancelModal('서울약국', '강남점', '2025-12-20 14:00')">취소</button></td>
                                     </tr>
                                     <tr class="medicine-row">
                                         <td><img src="https://via.placeholder.com/60" alt="가게" width="60" height="60"></td>
-                                        <td style="font-weight: 600; color: #212529;">건강약국</td>
+                                        <td style="font-weight: 600; color: #212529;">곰곰</td>
                                         <td>홍대점</td>
                                         <td>2025-12-22 10:00</td>
                                         <td><button class="btn-cancel" onclick="showCancelModal('건강약국', '홍대점', '2025-12-22 10:00')">취소</button></td>
@@ -447,14 +447,14 @@
                                 <tbody>
                                     <tr class="medicine-row">
                                         <td><img src="https://via.placeholder.com/60" alt="가게" width="60" height="60"></td>
-                                        <td style="font-weight: 600; color: #212529;">행복약국</td>
+                                        <td style="font-weight: 600; color: #212529;">곰곰</td>
                                         <td>신촌점</td>
                                         <td>2025-12-10 15:30</td>
                                         <td><span class="status-badge status-completed">완료</span></td>
                                     </tr>
                                     <tr class="medicine-row">
                                         <td><img src="https://via.placeholder.com/60" alt="가게" width="60" height="60"></td>
-                                        <td style="font-weight: 600; color: #212529;">미래약국</td>
+                                        <td style="font-weight: 600; color: #212529;">츄플러스</td>
                                         <td>압구정점</td>
                                         <td>2025-12-05 11:00</td>
                                         <td><span class="status-badge status-completed">완료</span></td>
@@ -477,7 +477,7 @@
                                 <tbody>
                                     <tr class="medicine-row">
                                         <td><img src="https://via.placeholder.com/60" alt="가게" width="60" height="60"></td>
-                                        <td style="font-weight: 600; color: #212529;">좋은약국</td>
+                                        <td style="font-weight: 600; color: #212529;">스시하루</td>
                                         <td>종로점</td>
                                         <td>2025-12-15 16:00</td>
                                         <td><span class="status-badge status-cancelled">취소됨</span></td>
