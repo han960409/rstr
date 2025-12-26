@@ -31,17 +31,17 @@ public class RestaurantController {
         return "hambook/restaurant-detail";
     }
     
-    // http://localhost:5050/complete?id=1
+    // http://localhost:6805/complete?id=1
     @GetMapping("/complete") 
     public String showCompletePage(@RequestParam Long id, Model model) {
         model.addAttribute("reservationId", id);    
         return "project_4th/Hambook_resv";
     }
     
-    // http://localhost:5050/login
+    // http://localhost:6805/login
     @GetMapping("/login")
     	public String login(Model a) {
-    	return "project_4th/Login";
+    	return "hambook/LoginDetail";
     }
     
     // http://localhost:5050/map

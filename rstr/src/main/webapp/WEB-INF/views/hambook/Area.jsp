@@ -239,7 +239,7 @@ kakao.maps.load(function() {
 
         // 마커 클릭 → 상세 페이지 이동
         kakao.maps.event.addListener(marker, 'click', () => {
-        	location.href = "${pageContext.request.contextPath}/restaurant/detail?id=" + r.id;
+        	location.href = "${pageContext.request.contextPath}/restaurant/" + r.id;
         });
     });
 });
