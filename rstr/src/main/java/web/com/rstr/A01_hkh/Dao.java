@@ -2,10 +2,12 @@ package web.com.rstr.A01_hkh;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
 
@@ -68,4 +70,12 @@ public interface Dao {
     		+ "    	    WHERE RESTAURANT_ID = #{restaurantId}\r\n"
     		+ "    	    ORDER BY id DESC")
     	List<Review> findReviewsByRestaurantId(int restaurantId);
+
+    @Insert("            INSERT INTO USERS\r\n"
+    		+ "            (ID, USER_ID, PASSWORD, NAME, EMAIL, PHONE)\r\n"
+    		+ "            VALUES\r\n"
+    		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone})")
+    int insertMember(MemberVO vo);
+
+    
 }

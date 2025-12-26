@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
 
@@ -71,5 +72,8 @@ public class hambooksService {
     public List<Review> getReviewsByRestaurantId(int restaurantId) {
         return dao.findReviewsByRestaurantId(restaurantId);
     }
-    
+    public void signup(MemberVO vo) {
+        dao.insertMember(vo);
+    }
+
 }

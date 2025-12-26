@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
 
@@ -121,5 +123,19 @@ public class 함북스 {
     @GetMapping("list")
     public String list() {
         return "hambook/Restaurant_list";
+    }
+    // http://localhost:6805/signup
+    @GetMapping("/signup")
+    public String signupForm() {
+        return "hambook/join";
+    }
+    // http://localhost:6805/signup
+    @PostMapping("/signup")
+    public String signup(MemberVO vo) {
+        if (vo.getRole() == null || vo.getRole().isBlank()) {
+            vo.setRole("USER");
+        }
+        hambooksService.signup(vo);
+        return "redirect:/login";
     }
 }

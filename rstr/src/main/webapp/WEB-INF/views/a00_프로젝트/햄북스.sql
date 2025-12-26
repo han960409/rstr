@@ -21,7 +21,7 @@ CREATE TABLE users (
     password VARCHAR2(48) NOT NULL,
     name VARCHAR2(100) NOT NULL,
     email VARCHAR2(100) NOT NULL UNIQUE,
-    phone NUMBER,
+    phone VARCHAR2(50),
     role VARCHAR2(20) DEFAULT 'USER' NOT NULL,
     profile_img_path VARCHAR2(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -128,6 +128,23 @@ CREATE TABLE review_recommend (
     user_id NUMBER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+/*
+	private String userId;
+    private String password;
+    private String name;
+    private String email;
+    private String phone;
+*/
+CREATE TABLE MEMBER (
+	USER_ID VARCHAR2(50) PRIMARY KEY,
+	PASSWORD VARCHAR2(50) NOT NULL,
+	NAME VARCHAR2(50),
+	EMAIL VARCHAR2(50),
+	PHONE VARCHAR2(50)
+);
+SELECT * FROM MEMBER;
+SELECT * FROM USERS;
+DROP TABLE MEMBER;
 SELECT * FROM review;
 ALTER TABLE REVIEW
 DROP COLUMN receive_recommend;
