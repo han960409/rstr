@@ -32,7 +32,7 @@ SET latitude = 37.28648227941,
 WHERE id = 1;
 
 UPDATE REVIEW
-SET REVIEWIMAGE = '/resources/images/churros.jpg,/resources/images/불고기.jpg,/resources/images/churros.jpg'
+SET REVIEWIMAGE = '/resources/images/churros.jpg,/resources/images/churros2.jpg,/resources/images/churros3.jpg'
 WHERE id = '1';
 INSERT INTO REVIEW
 			   VALUES ('16', '바삭 돈까스', '여태까지 먹은 돈까스는 가짜였어요!', '16', '16','' ,'5',SYSDATE, 592,'','');

@@ -25,6 +25,16 @@
     
 </head>
 <style>
+.carousel-item {
+    width: 760px;
+    height: 500px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 핵심 */
+}
     header {
         position: sticky;
         top: 0;
@@ -126,7 +136,7 @@
 <header id="header">
     <div class="header-container">
         <a href="http://localhost:6805/home" class="logo">
-            <img src="/images/icon/logo.png" width="180px" height="50px">
+            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
         </a>
         
         <nav class="nav-menu">
@@ -145,7 +155,8 @@
         </nav>
     </div>
 </header>
-    <body>
+<br>
+<body>
         <!-- Responsive navbar-->
 
 
@@ -156,15 +167,15 @@
                     <c:forEach var="review" items="${reviews}">
                     <article class="mb-5 border-bottom pb-4">
                         <!-- Post header-->
-                        <header class="mb-4">
+                        <h2>
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">${review.title}</h1>
+                            <h2 class="fw-bolder mb-1">${review.title}</h2>
                             <!-- Post meta content-->
                             <div class="text mb-2">작성자 : ${review.userId} | 평점 : ${review.rating}</div>
                             <!-- Post categories-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그1</a>
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그2</a>
-                        </header>
+                        </h2>
                         <!-- Preview image figure-->
                         <!-- Page content-->
 <c:if test="${not empty review.reviewImageList}">
@@ -310,14 +321,21 @@
         <!-- Core theme JS-->
         <script src="js/B_scripts.js"></script>
     </body>
-    <script>
-const carousel = document.getElementById('demo');
-const thumbs = document.querySelectorAll('.thumb-img');
+<script>
+document.querySelectorAll('.carousel').forEach(carousel => {
 
-carousel.addEventListener('slid.bs.carousel', function (e) {
-    thumbs.forEach(t => t.classList.remove('active-thumb'));
-    thumbs[e.to].classList.add('active-thumb');
+    // 해당 캐러셀 바로 아래 썸네일들만 찾기
+    const thumbs = carousel
+        .nextElementSibling
+        .querySelectorAll('.thumb-img');
+
+    carousel.addEventListener('slid.bs.carousel', function (e) {
+        thumbs.forEach(t => t.classList.remove('active-thumb'));
+        thumbs[e.to].classList.add('active-thumb');
+    });
 });
+
+// header 스크롤 효과 (기존 그대로)
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {

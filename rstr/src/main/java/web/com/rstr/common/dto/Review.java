@@ -18,7 +18,7 @@ public class Review {
 	@DecimalMin("0.5")						/* 평점 최소 */
 	@DecimalMax("5.0")						/* 평점 최대 */
 	private BigDecimal rating;				/* 평점 */
-	private int receive_recommend;			/* 추천 받은 수 */
+	private int receiveRecommend;			/* 추천 받은 수 */
 	private String pfImage;					/* 프로필 이미지 */
 	private List<String> reviewImageList;	/* 가게 리뷰 이미지*/
 	private String reviewImage;
@@ -38,7 +38,7 @@ public class Review {
 		// TODO Auto-generated constructor stub
 	}
 	public Review(int id, String title, String body, int restaurantId, int userId, int userVisitId,
-			LocalDateTime timeStamp, @DecimalMin("0.5") @DecimalMax("5.0") BigDecimal rating, int receive_recommend,
+			LocalDateTime timeStamp, @DecimalMin("0.5") @DecimalMax("5.0") BigDecimal rating, int receiveRecommend,
 			String pfImage, List<String> reviewImageList, String reviewImage) {
 		super();
 		this.id = id;
@@ -49,7 +49,7 @@ public class Review {
 		this.userVisitId = userVisitId;
 		this.timeStamp = timeStamp;
 		this.rating = rating;
-		this.receive_recommend = receive_recommend;
+		this.receiveRecommend = receiveRecommend;
 		this.pfImage = pfImage;
 		this.reviewImageList = reviewImageList;
 		this.reviewImage = reviewImage;
@@ -103,10 +103,10 @@ public class Review {
 		this.rating = rating;
 	}
 	public int getReceive_recommend() {
-		return receive_recommend;
+		return receiveRecommend;
 	}
 	public void setReceive_recommend(int receive_recommend) {
-		this.receive_recommend = receive_recommend;
+		this.receiveRecommend = receive_recommend;
 	}
 	public String getPfImage() {
 		return pfImage;
