@@ -270,7 +270,34 @@
             <p class="login-subtitle">맛집을 읽다, 예약을 잇다</p>
             
 <form action="${pageContext.request.contextPath}/signup" method="post">
+<div class="mb-3">
+    <label class="form-label">회원 유형</label>
+    <div class="d-flex gap-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="role" id="roleUser"
+                   value="USER" checked>
+            <label class="form-check-label" for="roleUser">
+                일반 회원
+            </label>
+        </div>
 
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="role" id="roleOwner"
+                   value="OWNER">
+            <label class="form-check-label" for="roleOwner">
+                사장님
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="role" id="roleAdmin"
+                   value="ADMIN">
+            <label class="form-check-label" for="roleAdmin">
+                관리자
+            </label>
+        </div>
+    </div>
+</div>
     <!-- 아이디 -->
     <div class="mb-3">
         <div class="input-icon">
@@ -308,34 +335,7 @@
                placeholder="이메일을 입력하세요" required>
     </div>
 	<!-- 회원 유형 -->
-<div class="mb-3">
-    <label class="form-label">회원 유형</label>
-    <div class="d-flex gap-3">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="role" id="roleUser"
-                   value="USER" checked>
-            <label class="form-check-label" for="roleUser">
-                일반 회원
-            </label>
-        </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="role" id="roleOwner"
-                   value="OWNER">
-            <label class="form-check-label" for="roleOwner">
-                사장님
-            </label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="role" id="roleAdmin"
-                   value="ADMIN">
-            <label class="form-check-label" for="roleAdmin">
-                관리자
-            </label>
-        </div>
-    </div>
-</div>
     <!-- 전화번호 -->
     <div class="mb-3">
         <input type="text" name="phone" class="form-control"
