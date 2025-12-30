@@ -91,6 +91,20 @@
 html {
     scroll-behavior: smooth;
 }
+.btn-custom {
+    background-color: #f97316; 
+    color: white;             
+    border: none;             
+}
+.custom{
+    background-color: #f97316; 
+    color: white;             
+    border: none;
+}
+.btn-custom:hover {
+    background-color: #e65c00; 
+    color: white;
+}
 </style>
 
 <body>
@@ -108,7 +122,7 @@ html {
                     빠르고 간편한 예약 기능을 제공하여,
                     더 즐겁고 스마트한 외식 경험을 제공합니다.
                 </p>
-                <a class="btn btn-primary btn-lg" href="#menuSection">메뉴 살펴보기</a>
+                <a class="btn btn-custom btn-lg" href="#menuSection">메뉴 살펴보기</a>
             </div>
         </div>
     </div>
@@ -126,7 +140,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/경주.jpg" class="d-block mx-auto" width="400px" height="200px">
    			   <div class="card bg-light border-0">
      			     <div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           </div>
  			             <h2 class="fs-4 fw-bold">지역별</h2>
@@ -140,7 +154,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/스테이크.jpg" class="d-block mx-auto" width="400px" height="200px">
    			   <div class="card bg-light border-0">
      			     <div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           </div>
  			             <h2 class="fs-4 fw-bold">음식 종류별</h2>
@@ -154,7 +168,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/왕관.jpg" class="d-block mx-auto" width="400px" height="200px">
    			 	<div class="card bg-light border-0">
      			  	<div class="card-body text-center p-4 p-lg-5 pt-0">
-    			        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			        <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			          	</div>
  			            <h2 class="fs-4 fw-bold">리뷰 명예의 전당</h2>
@@ -168,7 +182,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/크리스마스.jpg" class="d-block mx-auto" width="400px" height="200px"> 
    			   		<div class="card bg-light border-0">
      			     	<div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           	  </div>
  			            <h2 class="fs-4 fw-bold">테마별</h2>
