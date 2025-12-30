@@ -24,3 +24,53 @@ String getNum();
 @Select("SELECT ADDRESS FROM restaurant WHERE id=2")
 String getLoc();
 */
+ALTER TABLE REVIEW
+ADD REVIEWIMAGE VARCHAR2(300);
+UPDATE RESTAURANT
+SET latitude = 37.28648227941,
+	longitude = 127.01261281897
+WHERE id = 1;
+
+UPDATE REVIEW
+SET REVIEWIMAGE = '/resources/images/churros.jpg,/resources/images/churros2.jpg,/resources/images/churros3.jpg'
+WHERE id = '1';
+INSERT INTO REVIEW
+			   VALUES ('16', '바삭 돈까스', '여태까지 먹은 돈까스는 가짜였어요!', '16', '16','' ,'5',SYSDATE, 592,'','');
+SELECT * FROM RESTAURANT;
+SELECT * FROM REVIEW;
+SELECT * FROM REVIEW WHERE restaurant_Id = 1;
+SELECT r.id,
+       r.restaurant_name,
+       rv.BODY
+FROM restaurant r
+LEFT JOIN review rv
+  ON r.id = rv.restaurant_id
+WHERE r.id = 1;
+SELECT r.id, rv.restaurant_id
+FROM restaurant r
+LEFT JOIN review rv
+ON r.id = rv.restaurant_id;
+/* @Select("SELECT * review FROM restaurant r
+LEFT JOIN review rv ON r.id = rv.restaurant_id WHERE r.id = #{r.id};")
+List<review> getReviewList();
+*/
+ALTER TABLE restaurant
+ADD longitude NUMBER;
+DELETE FROM review
+WHERE id = 26;
+/*
+@Select("SELECT * FROM RESTAURANT ORDER BY RECEIVE_RECOMMEND DESC")
+List<Restaurant> getRestaurantList();
+
+*/
+
+/*
+@Select("SELECT * FROM REVIEW WHERE ID = #{id}");
+Review findById(int id);
+@Select("SELECT * FROM REVIEW ORDER BY created_at DESC");
+List<Review> findAll();
+*/
+SELECT *
+FROM review
+WHERE id BETWEEN 1 AND 5
+ORDER BY created_at DESC;

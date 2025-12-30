@@ -16,7 +16,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
-    // http://localhost:6805/restaurant/2
+    // http://localhost:6805/restaurant/1
     @GetMapping("/restaurant/{id}")
     public String restaurantDetail(@PathVariable int id, Model d) {
 
@@ -31,29 +31,24 @@ public class RestaurantController {
         return "hambook/restaurant-detail";
     }
     
-    // http://localhost:5050/complete?id=1
+    // http://localhost:6805/complete?id=1
     @GetMapping("/complete") 
     public String showCompletePage(@RequestParam Long id, Model model) {
         model.addAttribute("reservationId", id);    
-        return "project_4th/Hambook_resv";
+        return "hambook/ReservationCompleteDetail";
     }
     
-    // http://localhost:5050/login
+    // http://localhost:6805/login
     @GetMapping("/login")
     	public String login(Model a) {
-    	return "project_4th/Login";
+    	return "hambook/LoginDetail";
     }
+ 
     
-    // http://localhost:5050/map
-    @GetMapping("/map")
-    public String map(Model d) {
-    	return "project_4th/map";
-    }
-    
-    // http://localhost:5050/reservlist
+    // http://localhost:6805/reservlist
     @GetMapping("/reservlist")
     public String reserv(Model d) {
-    	return "project_4th/reservlist";
+    	return "hambook/ReservListDetail";
     }
     
     

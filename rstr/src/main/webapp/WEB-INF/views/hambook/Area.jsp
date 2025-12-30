@@ -26,6 +26,11 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min_styles.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <style>
+#map {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+}
     .map-container {
         width: 100%;
         max-width: 550px;
@@ -78,101 +83,115 @@
     a{
     text-decoration: none;
     }
+        header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .logo img {
+        width: 180px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: #f97316;
+    }
+
+    .nav-link svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            height: 64px;
+        }
+        .logo img {
+            width: 140px;
+            height: 40px;
+        }
+        .nav-menu {
+            gap: 1rem;
+        }
+        .nav-link {
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
 </style>
 </head>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand"
-           href="${pageContext.request.contextPath}/home">
-           <img src="${pageContext.request.contextPath}/resources/images/hambooks.png"
-   	 		 width="180px" height="60px">
+<header id="header">
+    <div class="header-container">
+        <a href="http://localhost:6805/home" class="logo">
+            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
         </a>
-
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/home">Home</a>
-                </li>
-
-                                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/">로그인</a>
-                </li>
-            </ul>
-        </div>
-     </div>
-</nav>
+        
+        <nav class="nav-menu">
+            <a href="http://localhost:6805/home" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="http://localhost:6805/login" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Login</span>
+            </a>
+        </nav>
+    </div>
 </header>
-<div class="map-container">
-    <h2 style="margin-bottom:30px; color:#333;">✔지역을 선택해 주세요.✔</h2>
-    
-    <svg class="korea-map" viewBox="0 0 440 680" xmlns="http://www.w3.org/2000/svg">
-
-        <a href="${pageContext.request.contextPath}/areaplus" class="region-group">
-            <path class="region-path" fill="#E1BEE7" 
-                  d="M135,145 L160,120 L190,115 L220,125 L230,165 L220,200 L180,215 L150,225 L120,205 L110,170 Z" />
-            <text x="170" y="175" class="region-label">경기/서울</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#B2EBF2" 
-                  d="M220,125 L240,60 L290,40 L310,100 L330,180 L280,200 L250,190 L230,165 Z" />
-            <text x="270" y="130" class="region-label">강원도</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#DCEDC8" 
-                  d="M230,165 L250,190 L280,200 L290,230 L260,260 L230,245 L220,200 Z" />
-            <text x="250" y="225" class="region-label">충북</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFF9C4" 
-                  d="M120,205 L150,225 L180,215 L220,200 L230,245 L210,270 L160,260 L130,230 Z" />
-            <text x="175" y="245" class="region-label">충남/대전</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFCDD2" 
-                  d="M280,200 L330,180 L360,270 L380,300 L330,340 L290,320 L260,260 L290,230 Z" />
-            <text x="320" y="260" class="region-label">경북/대구</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#BBDEFB" 
-                  d="M160,260 L210,270 L230,245 L260,260 L280,310 L220,340 L150,320 L140,290 Z" />
-            <text x="200" y="300" class="region-label">전북/광주</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#F8BBD0" 
-                  d="M280,310 L290,320 L330,340 L380,300 L370,390 L310,400 L270,360 Z" />
-            <text x="320" y="360" class="region-label">경남/부산/울산</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#FFE0B2" 
-                  d="M150,320 L220,340 L280,310 L270,360 L310,400 L250,450 L140,430 L110,380 Z" />
-            <text x="200" y="390" class="region-label">전남</text>
-        </a>
-
-        <a href="${pageContext.request.contextPath}" class="region-group">
-            <path class="region-path" fill="#B2DFDB" 
-                  d="M150,540 L230,530 L250,560 L190,580 L140,560 Z" />
-            <text x="195" y="560" class="region-label">제주</text>
-        </a>
-
-    </svg>
-</div>
+<br>
+<h2 style="text-align:center;">현재 지역의 맛집🍖🍖<h2>
+<div id="map" style="width:70%; height:600px;  margin:50px auto; border:5px solid black; align-items:center;"></div>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -188,5 +207,55 @@
 <!-- Core theme JS -->
 <script src="${pageContext.request.contextPath}/js/H_scripts.js"></script>
 
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1cb3f6f3ef7608356132050b83e29124&autoload=false"></script>
+<!-- 카카오 지도 SDK (먼저!) -->
+<script>
+const restaurants = [
+<c:forEach var="r" items="${restaurants}" varStatus="status">
+{
+    id: ${r.id},
+    name: "${r.restaurantName}",
+    lat: ${r.latitude},
+    lng: ${r.longitude}
+} <c:if test="${!status.last}">,</c:if>
+</c:forEach>
+];
+
+kakao.maps.load(function() {
+    const mapContainer = document.getElementById('map');
+    const mapOption = {
+        center: new kakao.maps.LatLng(37.2750, 127.0160), // 초기 중심
+        level: 3
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 여러 마커 생성
+    restaurants.forEach(r => {
+        const marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(r.lat, r.lng),
+            title: r.name
+        });
+
+        // 마커 클릭 → 상세 페이지 이동
+        kakao.maps.event.addListener(marker, 'click', () => {
+        	location.href = "${pageContext.request.contextPath}/restaurant/" + r.id;
+        });
+    });
+});
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+</script>
+<!-- 지도 생성 스크립트 -->
+
 </body>
+
+
+
 </html>

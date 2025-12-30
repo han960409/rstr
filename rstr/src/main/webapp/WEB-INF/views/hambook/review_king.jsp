@@ -29,461 +29,264 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min_styles.css" rel="stylesheet" />
 </head>
 <style>
-.review-box{
-	display:flex;
-	align-items:center;      /* 세로 가운데 */
-	justify-content:center;  /* 가로 가운데 (원하면) */
-	height:100%;
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .logo img {
+        width: 180px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: #f97316;
+    }
+
+    .nav-link svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            height: 64px;
+        }
+        .logo img {
+            width: 140px;
+            height: 40px;
+        }
+        .nav-menu {
+            gap: 1rem;
+        }
+        .nav-link {
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.review-text{
-	font-size:14px;
-	line-height:1.5;
-	text-align:center; /* 글자 가운데 (원하면) */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* 위쪽에 표시 */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.rank-item {
+  display: grid;
+  grid-template-columns: 40% 1fr 300px;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 리뷰 영역 */
+.review-area {
+  font-size: 14px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.review-header img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.review-body {
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* 정보 영역 */
+.info-area .rank {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.info-area .name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 이미지 영역 */
+.image-area img {
+  width: 300px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 </style>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand"
-           href="${pageContext.request.contextPath}/home">
-           <img src="${pageContext.request.contextPath}/resources/images/hambooks.png"
-   	 		 width="180px" height="60px">
+<header id="header">
+    <div class="header-container">
+        <a href="http://localhost:6805/home" class="logo">
+            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
         </a>
-
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/king">king</a>
-                </li>
-
-                                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/">로그인</a>
-                </li>
-            </ul>
-        </div>
-     </div>
-</nav>
+        
+        <nav class="nav-menu">
+            <a href="http://localhost:6805/home" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="http://localhost:6805/login" class="nav-link">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Login</span>
+            </a>
+        </nav>
+    </div>
 </header>
 <div class="content-wrap">
-	<div class="card">
-		<img src="${pageContext.request.contextPath}/resources/images/왕관.jpg"  style=" margin:0 auto; width:50px; height:50px;">
-		<div class="card-body" style=" margin:0 auto;">리뷰 명예의 전당</div>
-	</div>
-	
-	<ul class="list-group" style="width:90%; margin:0 auto;">
-
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
+<div class="d-flex flex-column align-items-center">
+<div class="card" style="border:none;">
+		<!-- <img src="${pageContext.request.contextPath}/resources/images/왕관.jpg"  style=" margin:0 auto; width:50px; height:50px;">  -->
+		<h1 class="card-body" style=" margin:0 auto; margin-top:30px;">리뷰 명예의 전당</h1>
 </div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
+<div class="d-flex justify-content mb-3" style="width:90%; margin-top:30px; align-items:left;">
+  <a href="${pageContext.request.contextPath}/king?sort=like"
+     class="btn btn-outline-dark me-2
+     ${sort eq 'like' ? 'active' : ''}" title="공감이 많은 순으로 정렬합니다.">
+    🔥 공감 많은 순
+  </a>
 
-		<div class="bg-info text-white text-center mb-1">
-			<img src="${pageContext.request.contextPath}/resources/images/치킨.jpg" style="width:120px; height:120px;">
-		</div>
+  <a href="${pageContext.request.contextPath}/king?sort=latest"
+     class="btn btn-outline-dark
+     ${sort eq 'latest' ? 'active' : ''}" title="오픈 최신 순으로 정렬합니다.">
+    🕒 오픈 최신 순
+  </a>
+</div>
+<ul class="list-group" style="width:90%; margin-bottom:35px;margin:0 auto;">
+<c:forEach var="r" items="${rstrList}" varStatus="status" begin="0" end="4">
+<li class="list-group-item">
+  <div class="rank-item">
 
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			치킨
-		</div>
-
+    <!-- 왼쪽: 식당 정보 -->
+    <div class="info-area">
+    <div class="rank">🏆 ${status.index + 1}위</div>
+    <div>👍 ${r.receiveRecommend}</div>
+    <div class="name">
+  			<a href="${pageContext.request.contextPath}/review/restaurant/${r.id}"
+     			style="text-decoration:none; color:inherit;">
+    			${r.restaurantName}
+ 			 </a>
 	</div>
+      <div>🕧 ${r.operatingHours}</div>
+      <div>🚩 ${r.address}</div>
+    </div>
 
-	<!-- 🔸 오른쪽: 추천 수 -->
+    <!-- 가운데: 리뷰 -->
+<div class="review-area">
+  <c:set var="rv" value="${reviewMap[r.id]}" />
 
+  <c:if test="${rv ne null}">
+    <div class="review-header">
+      <img src="${pageContext.request.contextPath}${rv.pfImage}">
+      <span>${rv.userId} 고객님의 리뷰</span>
+    </div>
 
+    <div class="review-body">
+      ${rv.body}
+    </div>
+  </c:if>
+
+  <c:if test="${rv eq null}">
+    <div class="text-muted small">
+      아직 등록된 리뷰가 없습니다.
+    </div>
+  </c:if>
 </div>
 
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
+    <!-- 오른쪽: 이미지 -->
+    <div class="image-area">
+      <img src="${pageContext.request.contextPath}${r.imagePath}"           
+    		width="300"
+    		height="150"
+           alt="식당 이미지">
+    </div>
 
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				${restaurantName}
-			</div>
-			
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천하기</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
+  </div>
 </li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-<li class="list-group-item"
-    style="margin-bottom:30px; padding-bottom:20px; border:none; border-bottom:1px solid lightgray;">
-	<div class="d-flex align-items-center" style="min-height:150px;">
-
-		<!-- ① 가게명 -->
-	<div class="p-3 d-flex" style="width:20%;">
-
-	<!-- 🔹 왼쪽: 이미지 + 아이디 -->
-<!-- ✅ 부모 (세로 정렬 기준) -->
-<div class="d-flex flex-column justify-content-between">
-
-	<!-- 위 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			등수
-		</div>
-	</div>
-
-	<!-- 아래 -->
-	<div class="d-flex align-items-center justify-content-end flex-grow-1">
-		<div class="text-black d-flex align-items-center justify-content-center"
-		     style="width:50px; height:100%;">
-			👍500
-		</div>
-	</div>
-
-</div>
-		<div class="d-flex flex-column align-items-center"
-	     style="width:200px;">
-
-		<div class="bg-info text-white text-center mb-1"
-		     style="width:120px; height:130px;">
-			프로필 이미지
-		</div>
-
-		<div class="bg-warning text-center p-2"
-		     style="width:120px;">
-			아이디
-		</div>
-
-	</div>
-
-	<!-- 🔸 오른쪽: 추천 수 -->
-
-
-</div>
-
-		<!-- ② 리뷰 표시 영역 -->
-		<div class="review-box" style="width:95%; height:170px;">
-
-			<div class="review-text"style="text-align:center;">
-				<!-- 서버에서 받아온 리뷰 -->
-				맛도 좋고 분위기도 최고였어요 👍  
-				다음에 또 방문하고 싶습니다.
-			</div>
-
-		</div>
-
-
-		
-		<div class="p-3 d-flex flex-column align-items-end"
-		     style="width:30%;">
-
-			<div class="bg-info text-white text-center p-2 mb-1"
-			     style="width:200px;">
-				가게이름
-			</div>
-
-			<div class="d-flex" style="width:200px;">
-				<div class="bg-warning text-center p-2" style="width:100px;">추천 수</div>
-				<div class="bg-primary text-center p-2" style="width:100px;">평점</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</li>
-
+</c:forEach>
 </ul>
 </div>
+</div>
+
+
 
 
 
@@ -503,7 +306,41 @@
 
 <!-- Core theme JS -->
 <script src="${pageContext.request.contextPath}/js/H_scripts.js"></script>
+<script>
+  function sortByLike() {
+    const list = document.querySelector(".list-group");
+    const items = Array.from(list.children);
 
+    items.sort((a, b) => {
+      return b.dataset.like - a.dataset.like;
+    });
+
+    items.forEach(item => list.appendChild(item));
+  }
+
+  function sortByDate() {
+    const list = document.querySelector(".list-group");
+    const items = Array.from(list.children);
+
+    items.sort((a, b) => {
+      return new Date(b.dataset.date) - new Date(a.dataset.date);
+    });
+
+    items.forEach(item => list.appendChild(item));
+  }
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+          const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+</script>
 </body>
 </html>
 
