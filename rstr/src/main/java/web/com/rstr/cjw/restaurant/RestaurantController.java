@@ -15,9 +15,7 @@ import java.util.List;
 public class RestaurantController {
     
     @Autowired
-    private RestaurantService service;
-    
-    // ==================== 기존 코드 ====================
+    private RestaurantService service; 
     
     // http://localhost:6805/restaurant/1
     @GetMapping("/restaurant/{id}")
@@ -51,15 +49,13 @@ public class RestaurantController {
         return "hambook/ReservListDetail";
     }
     
-    // ==================== 새로 추가: 식당 등록 기능 ====================
-    
-    // http://localhost:6805/restaurant/new (등록 페이지 보여주기)
+    // http://localhost:6805/restaurant/new
     @GetMapping("/restaurant/new")
     public String showNewRestaurantPage() {
         return "hambook/restaurant-register";
     }
     
-    // http://localhost:6805/restaurant/new (등록 처리)
+    // http://localhost:6805/restaurant/new
     @PostMapping("/restaurant/new")
     public String createNewRestaurant(
             @RequestParam("rstrName") String restaurantName,
@@ -77,27 +73,22 @@ public class RestaurantController {
             RedirectAttributes redirectAttributes) {
         
         try {
-            // Service에 등록 요청 (ID 반환받음)
             int restaurantId = service.createRestaurant(
                 restaurantName, category, address, city, description, operatingHours, phone,
                 images, menuNames, menuPrices, menuDescriptions, menuImages
             );
             
-            // 성공 메시지
             redirectAttributes.addFlashAttribute("successMessage", 
                 "'" + restaurantName + "' 식당이 성공적으로 등록되었습니다!");
             
-            // 방금 등록한 식당 상세 페이지로 이동
             return "redirect:/restaurant/" + restaurantId;
             
         } catch (Exception e) {
             e.printStackTrace();
             
-            // 에러 메시지
             redirectAttributes.addFlashAttribute("errorMessage", 
                 "등록 실패: " + e.getMessage());
             
-            // 다시 등록 페이지로
             return "redirect:/restaurant/new";
         }
     }

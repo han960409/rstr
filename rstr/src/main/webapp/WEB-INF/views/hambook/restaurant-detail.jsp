@@ -9,13 +9,16 @@
     <title>함북스>${rstrName}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #FFF5E6;
+        }
         .main-image-box {
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             overflow: hidden;
         }
 		.main-image-box img {
@@ -24,9 +27,9 @@
 		    object-fit: contain;
 		}
         .thumbnail-box {
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             height: 80px;
-            border: 2px solid #dee2e6;
+            border: 2px solid #FFD7A8;
             cursor: pointer;
             overflow: hidden;
             display: flex;
@@ -40,16 +43,16 @@
             object-fit: cover;
         }
         .thumbnail-box:hover {
-            border-color: #0d6efd;
+            border-color: #FF8C42;
             transform: scale(1.05);
         }
         .thumbnail-box.active {
-            border-color: #0d6efd;
+            border-color: #FF8C42;
             border-width: 3px;
         }
         .menu-item {
             background-color: white;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             padding: 15px;
             margin-bottom: 15px;
             display: flex;
@@ -58,7 +61,8 @@
             transition: all 0.3s;
         }
         .menu-item:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(255, 140, 66, 0.2);
+            border-color: #FFB380;
         }
         .menu-img {
             width: 100px;
@@ -86,19 +90,20 @@
         .menu-price {
             font-size: 1.1rem;
             font-weight: bold;
-            color: #0d6efd;
+            color: #FF8C42;
         }
         .info-box {
             background-color: white;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             padding: 20px;
             margin-bottom: 15px;
+            border-radius: 8px;
         }
         .tag-box {
             display: inline-block;
             padding: 5px 15px;
             margin: 5px;
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             border-radius: 20px;
         }
         .review-profile-img {
@@ -106,7 +111,7 @@
             height: 50px;
             border-radius: 4px;
             object-fit: cover;
-            border: 2px solid #dee2e6;
+            border: 2px solid #FFD7A8;
             flex-shrink: 0;
         }
         .review-item {
@@ -114,10 +119,33 @@
             gap: 15px;
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #FFE4C4;
         }
         .review-content {
             flex: 1;
+        }
+        .btn-primary {
+            background-color: #FF8C42;
+            border-color: #FF8C42;
+        }
+        .btn-primary:hover {
+            background-color: #FF7526;
+            border-color: #FF7526;
+        }
+        .btn-outline-primary {
+            color: #FF8C42;
+            border-color: #FF8C42;
+        }
+        .btn-outline-primary:hover {
+            background-color: #FF8C42;
+            border-color: #FF8C42;
+            color: white;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(255, 140, 66, 0.1);
         }
     </style>
 </head>
