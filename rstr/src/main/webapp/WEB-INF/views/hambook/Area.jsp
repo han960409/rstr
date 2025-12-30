@@ -150,6 +150,16 @@ header.scrolled {
         height: 18px;
     }
 }
+.btn-custom {
+    background-color: #f97316; 
+    color: white;             
+    border: none;             
+}
+
+.btn-custom:hover {
+    background-color: #e65c00; 
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -192,10 +202,10 @@ header.scrolled {
 <h2 style="text-align:center;">현재 지역의 맛집🍖🍖<h2>
 <!-- 모든 가게 보기 버튼 -->
 <div style="text-align:center; margin-top:20px;">
-    <a href="${pageContext.request.contextPath}/list" 
-       class="btn btn-warning btn-lg">
-       모든 가게 보기
-    </a>
+<a href="${pageContext.request.contextPath}/list" 
+   class="btn btn-custom btn-lg">
+   모든 가게 보기
+</a>
 </div>
 <div id="map" style="width:70%; height:600px;  margin:50px auto; border:5px solid black; align-items:center;"></div>
 <!-- Footer -->
