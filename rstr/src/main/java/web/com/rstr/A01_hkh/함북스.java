@@ -112,6 +112,17 @@ public class 함북스 {
 
         return "hambook/review_king";
     }
+    // http://localhost:6805/list
+    @GetMapping("/list")
+    public String restaurantList(Model model) {
+
+        List<Restaurant> restaurantList =
+                hambooksService.getAllRestaurants();
+
+        model.addAttribute("restaurantList", restaurantList);
+
+        return "hambook/RestaurantList"; // /WEB-INF/views/restaurant/list.jsp
+    }
 
     // http://localhost:6805/signup
     @GetMapping("/signup")

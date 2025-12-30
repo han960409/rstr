@@ -77,5 +77,13 @@ public interface Dao {
     		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone})")
     int insertMember(MemberVO vo);
 
-    
+   @Select("SELECT\r\n"
+   		+ "            ID,\r\n"
+   		+ "            RESTAURANT_NAME,\r\n"
+   		+ "            CATEGORY,\r\n"
+   		+ "            ADDRESS,\r\n"
+   		+ "            OPERATING_HOURS\r\n"
+   		+ "        FROM RESTAURANT\r\n"
+   		+ "        ORDER BY RESTAURANT_NAME")
+    List<Restaurant> getAllRestaurant();
 }
