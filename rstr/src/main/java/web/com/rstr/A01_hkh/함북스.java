@@ -112,16 +112,27 @@ public class 함북스 {
 
         return "hambook/review_king";
     }
-    // http://localhost:6805/list
+ // http://localhost:6805/list
     @GetMapping("/list")
     public String restaurantList(Model model) {
 
         List<Restaurant> restaurantList =
-                hambooksService.getAllRestaurants();
+                hambooksService.getAllRestaurant();
 
         model.addAttribute("restaurantList", restaurantList);
 
-        return "hambook/RestaurantList"; // /WEB-INF/views/restaurant/list.jsp
+        return "hambook/RestaurantList";
+    }
+    // http://localhost:6805/restaurant/26
+    @GetMapping("/{id}")
+    public String restaurantDetail(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Restaurant restaurant = hambooksService.findById(id);
+        model.addAttribute("restaurant", restaurant);
+
+        return "hambook/restaurant-detail"; // restaurant-detail.jsp
     }
 
     // http://localhost:6805/signup

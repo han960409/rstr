@@ -165,9 +165,9 @@ INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '치킨천국', '16:00~02
 INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '카페모닝', '08:00~20:00', '카페', '수원시 장안구 수원KT위즈파크 앞', '수원', '031-555-6666', '브런치 카페', CURRENT_TIMESTAMP,0);
 
 UPDATE restaurant SET receive_recommend = 360 WHERE id = 26;
-SELECT id, receive_recommend
-FROM restaurant
-WHERE id = 15;
+SELECT * 
+FROM menu
+WHERE restaurant_id = 26;
 DROP TABLE menu;
 
 INSERT INTO menu VALUES (menu_seq.NEXTVAL, '불고기 정식', 12000, 1, NULL, '대표 메뉴', CURRENT_TIMESTAMP);

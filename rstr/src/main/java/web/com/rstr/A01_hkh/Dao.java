@@ -72,18 +72,19 @@ public interface Dao {
     	List<Review> findReviewsByRestaurantId(int restaurantId);
 
     @Insert("            INSERT INTO USERS\r\n"
-    		+ "            (ID, USER_ID, PASSWORD, NAME, EMAIL, PHONE)\r\n"
+    		+ "            (ID, USER_ID, PASSWORD, NAME, EMAIL, PHONE ,ROLE)\r\n"
     		+ "            VALUES\r\n"
-    		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone})")
+    		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone}, #{role})")
     int insertMember(MemberVO vo);
 
-   @Select("SELECT\r\n"
-   		+ "            ID,\r\n"
-   		+ "            RESTAURANT_NAME,\r\n"
-   		+ "            CATEGORY,\r\n"
-   		+ "            ADDRESS,\r\n"
-   		+ "            OPERATING_HOURS\r\n"
-   		+ "        FROM RESTAURANT\r\n"
-   		+ "        ORDER BY RESTAURANT_NAME")
+   @Select("    SELECT\r\n"
+   		+ "        ID               AS id,\r\n"
+   		+ "        RESTAURANT_NAME  AS restaurantName,\r\n"
+   		+ "        CATEGORY         AS category,\r\n"
+   		+ "        ADDRESS          AS address,\r\n"
+   		+ "        OPERATING_HOURS AS operatingHours,\r\n " 
+   		+ " 	IMAGE_PATH       AS imagePath \r\n "
+   		+ "    FROM RESTAURANT\r\n"
+   		+ "    ORDER BY RESTAURANT_NAME")
     List<Restaurant> getAllRestaurant();
 }

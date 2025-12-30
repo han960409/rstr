@@ -1,7 +1,7 @@
 <%@ page language="java"
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     request.setCharacterEncoding("UTF-8");%>
 
@@ -31,26 +31,52 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<table>
-    <thead>
-        <tr>
+<div class="container my-4">
+<div class="table-responsive"">
+  <table class="table table-bordered table-hover align-middle shadow-sm" style="text-align:center;">
+    <thead class="table-light">
+        <tr class="text-center">
+            <th style="width: 120px;">이미지</th>
             <th>가게명</th>
-            <th>카테고리</th>
             <th>주소</th>
-            <th>영업시간</th>
+            <th style="width: 140px;">영업시간</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach var="r" items="${restaurantList}">
             <tr>
-                <td>${r.restaurantName}</td>
-                <td>${r.category}</td>
+                <!-- 이미지 -->
+                <td class="text-center">
+                    <img
+                        src="${pageContext.request.contextPath}${r.imagePath}"
+                        alt="${r.restaurantName}"
+                        class="img-fluid rounded"
+                        style="width: 100px; height: 70px; object-fit: cover;"
+                        onerror="this.src='${pageContext.request.contextPath}/images/no-image.png'"
+                    />
+                </td>
+
+                <!-- 가게명 -->
+                <td class="fw-bold">
+<a href="${pageContext.request.contextPath}/restaurant/${r.id}"
+   class="text-decoration-none text-dark fw-bold">
+    ${r.restaurantName}
+</a>
+</td>
+
+                <!-- 주소 -->
                 <td>${r.address}</td>
-                <td>${r.operatingHours}</td>
+
+                <!-- 영업시간 -->
+                <td class="text-nowrap text-center">
+                    ${r.operatingHours}
+                </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
+</div>
+</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

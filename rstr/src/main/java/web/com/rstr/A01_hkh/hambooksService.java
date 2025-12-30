@@ -76,7 +76,12 @@ public class hambooksService {
         dao.insertMember(vo);
     }
     public List<Restaurant> getAllRestaurant() {
-        return dao.selectAllRestaurant();
+    	
+        return dao.getAllRestaurant();
     }
+    public Restaurant findById(int id) {
+        return dao.findById(id);
+    }
+    
 
 }
