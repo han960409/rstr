@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
@@ -123,5 +124,12 @@ public interface Dao {
            "FROM USERS " +
            "WHERE ID = #{id}")
    MemberVO selectById(@Param("id") Long id);
+   @Insert("INSERT INTO comments (id, body, user_id, review_id) " +
+           "VALUES (comment_seq.NEXTVAL, #{body}, #{userId}, #{reviewId})")
+   void insertComment(Comment comment);
+
+   @Select("SELECT id, body, user_id AS userId, review_id AS reviewId, created_at AS createdAt " +
+           "FROM comments WHERE review_id = #{reviewId} ORDER BY created_at ASC")
+   List<Comment> findCommentsByReviewId(Long reviewId);
 }
 

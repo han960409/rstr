@@ -30,7 +30,9 @@
 </head>
 <style>
 
-
+        body {
+            background-color: #FFF5E6;
+        }
     .logo {
         display: flex;
         align-items: center;
@@ -110,19 +112,12 @@ html {
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!-- Header -->
-<h2 class="py-5">
+<h2 class="py-2 text-center"> <!-- py-2로 위아래 패딩 줄임, text-center로 가운데 정렬 -->
     <div class="container px-lg-5">
-        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="p-4 p-lg-5 bg-light rounded-3">
             <div class="m-4 m-lg-5">
-                <h1 class="display-5 fw-bold">함북스(HamBooks)</h1>
-                <p class="fs-4">
-                    함북스는 ‘햄버거’를 의미하는 유행어 ‘함부기’에서 착안한
-                    ‘함(ham)’과 예약을 뜻하는 ‘books’의 조합으로 탄생한 브랜드입니다.
-                    사용자들의 평점 데이터를 기반으로 한 맛집 랭킹 서비스와
-                    빠르고 간편한 예약 기능을 제공하여,
-                    더 즐겁고 스마트한 외식 경험을 제공합니다.
-                </p>
-                <a class="btn btn-custom btn-lg" href="#menuSection">메뉴 살펴보기</a>
+                <img src="${pageContext.request.contextPath}/resources/images/hambooksLogo.jpg" class="img-fluid mx-auto d-block">
+                <a class="btn btn-custom btn-lg mt-3" href="#menuSection">메뉴 살펴보기</a>
             </div>
         </div>
     </div>

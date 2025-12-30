@@ -113,12 +113,12 @@ ALTER TABLE restaurant ADD receive_recommend NUMBER;
 */
 SELECT 
 -- 댓글 테이블
-CREATE TABLE comments (
+CREATE TABLE COMMENTS (
     id NUMBER PRIMARY KEY,
     body CLOB NOT NULL,
-    user_id NUMBER NOT NULL,
+    user_id VARCHAR2(50) NOT NULL,
     review_id NUMBER NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 리뷰 추천 테이블
@@ -143,12 +143,12 @@ CREATE TABLE MEMBER (
 	PHONE VARCHAR2(50)
 );
 SELECT * FROM MEMBER;
-SELECT * FROM USERS;
-DROP TABLE MEMBER;
+SELECT * FROM COMMENTS;
+DROP TABLE COMMENTS;
 SELECT * FROM review;
 SELECT * FROM RESTAURANT;
 ALTER TABLE REVIEW
-DROP COLUMN receive_recommend;
+ADD COMMENTBODY VARCHAR2(100);
 -- ============================================
 -- 샘플 데이터
 -- ============================================

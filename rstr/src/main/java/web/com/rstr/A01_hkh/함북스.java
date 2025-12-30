@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
@@ -102,15 +103,46 @@ public class 함북스 {
         List<Integer> restaurantIds = rstrList.stream()
                 .map(Restaurant::getId)
                 .toList();
-
+        
         Map<Integer, Review> reviewMap =
                 hambooksService.getTopReviewMap(restaurantIds);
 
         model.addAttribute("rstrList", rstrList);
         model.addAttribute("reviewMap", reviewMap);
         model.addAttribute("sort", sort);
+        
 
         return "hambook/review_king";
+    }
+    /* 댓글 등록 */
+
+
+    /* 리뷰 상세 페이지에서 댓글 조회 */
+    @GetMapping("/{reviewId}")
+    public String reviewDetail(@PathVariable Long reviewId, Model model) {
+        Review review = hambooksService.getReviewById(reviewId.intValue());
+        List<Comment> comments = hambooksService.getCommentsByReviewId(reviewId);
+
+        model.addAttribute("review", review);
+        model.addAttribute("comments", comments);
+
+        return "hambook/review_king"; // JSP 또는 Thymeleaf 페이지
+    }
+    
+    @PostMapping("/review/addComment")
+    public String addComment(@RequestParam Long reviewId,
+                             @RequestParam String userId,  // ← String으로 변경
+                             @RequestParam String body) {
+
+        Comment comment = new Comment();
+        comment.setReviewId(reviewId);
+        comment.setUserId(userId);  // Comment 클래스도 String 타입이어야 함
+        comment.setBody(body);
+
+        hambooksService.addComment(comment);
+
+        // 댓글 등록 후 리뷰 상세 페이지로 리다이렉트
+        return "redirect:/review/restaurant/" + reviewId;
     }
  // http://localhost:6805/list
     @GetMapping("/list")
