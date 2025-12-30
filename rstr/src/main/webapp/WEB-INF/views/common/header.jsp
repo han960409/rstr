@@ -90,17 +90,13 @@ header.scrolled {
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+    display: none;
     overflow: hidden;
+    z-index: 9999;
 }
 
 .dropdown.active .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    display: block;
 }
 
 .dropdown-item {
@@ -232,7 +228,7 @@ header.scrolled {
                                 
                                 <c:when test="${sessionScope.user.role == 'OWNER'}">
                                     <!-- 점주 메뉴 -->
-                                    <a href="/owner/register" class="dropdown-item">
+                                    <a href="/restaurant/new" class="dropdown-item">
                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                         </svg>
@@ -264,7 +260,7 @@ header.scrolled {
                             </c:choose>
                             
                             <!-- 로그아웃 (공통) -->
-                            <a href="/logout" class="dropdown-item logout" onclick="return confirmLogout()">
+                            <a href="http://localhost:6805/logout" class="dropdown-item logout" onclick="return confirmLogout()">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                 </svg>
@@ -274,7 +270,7 @@ header.scrolled {
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <a href="/login" class="nav-link">
+                    <a href="http://localhost:6805/login" class="nav-link">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                         </svg>
