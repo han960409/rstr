@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const passwordInput = document.getElementById('password');
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
-            toggle.textContent = '🙈';
+            toggle.innerHTML = '<img src="/images/icon/닫힌눈.png" width="30">';
         } else {
             passwordInput.type = 'password';
             toggle.textContent = '👁️';

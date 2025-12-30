@@ -87,4 +87,41 @@ public interface Dao {
    		+ "    FROM RESTAURANT\r\n"
    		+ "    ORDER BY RESTAURANT_NAME")
     List<Restaurant> getAllRestaurant();
+   
+   /**
+    * 로그인: 아이디와 비밀번호로 사용자 조회
+    */
+   @Select("SELECT " +
+           "ID as id, " +
+           "USER_ID as userId, " +
+           "NAME as name, " +
+           "EMAIL as email, " +
+           "PHONE as phone, " +
+           "ROLE as role " +
+           "FROM USERS " +
+           "WHERE USER_ID = #{userId} " +
+           "AND PASSWORD = #{password}")
+   MemberVO selectByUserIdAndPassword(@Param("userId") String userId, 
+                                      @Param("password") String password);
+   
+   /**
+    * 아이디 중복 체크
+    */
+   @Select("SELECT COUNT(*) FROM USERS WHERE USER_ID = #{userId}")
+   int countByUserId(@Param("userId") String userId);
+   
+   /**
+    * 사용자 ID로 조회
+    */
+   @Select("SELECT " +
+           "ID as id, " +
+           "USER_ID as userId, " +
+           "NAME as name, " +
+           "EMAIL as email, " +
+           "PHONE as phone, " +
+           "ROLE as role " +
+           "FROM USERS " +
+           "WHERE ID = #{id}")
+   MemberVO selectById(@Param("id") Long id);
 }
+
