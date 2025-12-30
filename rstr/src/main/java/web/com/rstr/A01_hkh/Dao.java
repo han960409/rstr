@@ -131,5 +131,10 @@ public interface Dao {
    @Select("SELECT id, body, user_id AS userId, review_id AS reviewId, created_at AS createdAt " +
            "FROM comments WHERE review_id = #{reviewId} ORDER BY created_at ASC")
    List<Comment> findCommentsByReviewId(Long reviewId);
+   @Select("SELECT *\n"
+   		+ "FROM COMMENTS\n"
+   		+ "WHERE review_id = ?\n"
+   		+ "ORDER BY created_at ASC")
+   List<Comment> findByReviewId(Long reviewId);
 }
 

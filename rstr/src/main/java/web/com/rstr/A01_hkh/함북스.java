@@ -1,5 +1,6 @@
 package web.com.rstr.A01_hkh;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -118,33 +119,40 @@ public class 함북스 {
 
 
     /* 리뷰 상세 페이지에서 댓글 조회 */
-    @GetMapping("/{reviewId}")
+    @GetMapping("/review/{reviewId}")
     public String reviewDetail(@PathVariable Long reviewId, Model model) {
+
         Review review = hambooksService.getReviewById(reviewId.intValue());
+
+        // 댓글
         List<Comment> comments = hambooksService.getCommentsByReviewId(reviewId);
+        review.setCommentList(comments);
 
-        model.addAttribute("review", review);
-        model.addAttribute("comments", comments);
+        // 🔥 가게 정보
+        Restaurant restaurant =
+            hambooksService.getRestaurantById(review.getRestaurantId());
 
-        return "hambook/review_king"; // JSP 또는 Thymeleaf 페이지
+        model.addAttribute("reviews", List.of(review));
+        model.addAttribute("restaurant", restaurant); // ← 이게 없었음
+
+        return "hambook/review_info";
     }
-    
     @PostMapping("/review/addComment")
     public String addComment(@RequestParam Long reviewId,
-                             @RequestParam String userId,  // ← String으로 변경
+                             @RequestParam String userId,
                              @RequestParam String body) {
 
         Comment comment = new Comment();
         comment.setReviewId(reviewId);
-        comment.setUserId(userId);  // Comment 클래스도 String 타입이어야 함
+        comment.setUserId(userId);
         comment.setBody(body);
 
         hambooksService.addComment(comment);
 
-        // 댓글 등록 후 리뷰 상세 페이지로 리다이렉트
-        return "redirect:/review/restaurant/" + reviewId;
+        // ✅ 반드시 review/{id}로
+        return "redirect:/review/" + reviewId;
     }
- // http://localhost:6805/list
+    // http://localhost:6805/list
     @GetMapping("/list")
     public String restaurantList(Model model) {
 

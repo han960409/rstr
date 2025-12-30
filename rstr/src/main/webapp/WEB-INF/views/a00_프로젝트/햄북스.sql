@@ -111,14 +111,14 @@ ALTER TABLE restaurant ADD receive_recommend NUMBER;
     @DecimalMax("5.0")
     private BigDecimal rating;
 */
-SELECT 
+
 -- 댓글 테이블
 CREATE TABLE COMMENTS (
     id NUMBER PRIMARY KEY,
     body CLOB NOT NULL,
     user_id VARCHAR2(50) NOT NULL,
     review_id NUMBER NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
 -- 리뷰 추천 테이블
