@@ -38,12 +38,6 @@ public class RestaurantController {
         return "hambook/ReservationCompleteDetail";
     }
     
-    // http://localhost:6805/login
-    @GetMapping("/login")
-    public String login(Model a) {
-        return "hambook/LoginDetail";
-    }
-    
     
     // http://localhost:6805/reservlist
     @GetMapping("/reservlist")
