@@ -75,5 +75,3 @@ FROM review
 WHERE id BETWEEN 1 AND 5
 ORDER BY created_at DESC;
 SELECT * FROM RESTAURANT;
-
-SELECT * FROM menu WHERE restaurant_id = 1;
