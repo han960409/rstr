@@ -171,14 +171,15 @@
                 <div class="row g-2 mb-4">
                     <c:forEach var="img" items="${images}" varStatus="status">
                         <div class="col-2">
-                            <div class="thumbnail-box ${status.first ? 'active' : ''}" onclick="changeImage(this, ${status.index})">
+                            <div class="thumbnail-box ${status.first ? 'active' : ''}" 
+                                 data-img-url="${pageContext.request.contextPath}${img.imgUrl}">
                                 <img src="${pageContext.request.contextPath}${img.imgUrl}" alt="썸네일 ${status.count}">
                             </div>
                         </div>
                     </c:forEach>
                 </div>
                 
- <div class="info-box">
+                <div class="info-box">
                     <h5 class="mb-4"><img src ="\images\icon\메뉴 아이콘.png" width = "48px", height = "40px"> 메뉴</h5>
                     
                     <c:choose>
@@ -348,54 +349,34 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    const images = [
-        <c:forEach var="img" items="${images}" varStatus="status">
-            '${pageContext.request.contextPath}${img.imgUrl}'${!status.last ? ',' : ''}
-        </c:forEach>
-    ];
-    
-    // 썸네일 클릭 시 실행되는 함수
-    function changeImage(element, index) {
-        const mainImage = document.querySelector('#mainImage img');
-        
-        // 클릭한 인덱스에 해당하는 이미지 주소로 메인 이미지 소스 변경
-        mainImage.src = images[index];
-        
-        // 모든 썸네일에서 active 클래스 제거 (파란 테두리 제거)
-        document.querySelectorAll('.thumbnail-box').forEach(thumb => {
-            thumb.classList.remove('active');
-        });
-        
-        // 클릭한 썸네일에만 active 클래스 추가 (파란 테두리 추가)
-        element.classList.add('active');
-    }
-        // 평균 평점 및 리뷰 수 계산 함수 (예시)
-        function updateReviewStats() {
-            // 실제로는 서버에서 데이터를 받아와야 합니다
-            const reviews = [
-                { rating: 4 },
-                { rating: 5 },
-                { rating: 4 }
-            ];
-            
-            // 평균 평점 계산
-            const avgRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
-            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
-            
-            // 리뷰 수
-            document.getElementById('reviewCount').textContent = reviews.length;
-        }
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.querySelectorAll('.thumbnail-box').forEach(function(thumbnail) {
+                thumbnail.addEventListener('click', function() {
+                    const imgUrl = this.getAttribute('data-img-url');
+                    const mainImage = document.querySelector('#mainImage img');
+                    mainImage.src = imgUrl;
+
+                    document.querySelectorAll('.thumbnail-box').forEach(thumb => {
+                        thumb.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                });
+            });
+
+            const header = document.getElementById('header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 20) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
             }
         });
-        
-        // 페이지 로드 시 실행
-        // updateReviewStats();
     </script>
 </body>
 </html>

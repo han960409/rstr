@@ -17,7 +17,6 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
     
-    // ==================== 기존 코드 ====================
     
     // http://localhost:6805/restaurant/1
     @GetMapping("/restaurant/{id}")
@@ -52,7 +51,6 @@ public class RestaurantController {
         return "hambook/ReservListDetail";
     }
     
-    // ==================== 새로 추가: 식당 등록 기능 ====================
     
     // http://localhost:6805/restaurant/new (등록 페이지 보여주기)
     @GetMapping("/restaurant/new")

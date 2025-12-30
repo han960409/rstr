@@ -269,7 +269,7 @@
             <h1 class="login-title">HAMBOOKS</h1>
             <p class="login-subtitle">맛집을 읽다, 예약을 잇다</p>
             
-            <form>
+            <form id="loginForm" method="post" action="/login">
                 <div class="mb-3">
                     <div class="input-icon">
                         <input type="text" class="form-control" placeholder="아이디를 입력하세요">
@@ -279,7 +279,9 @@
                 <div class="mb-3">
                     <div class="input-icon password-icon" style="position: relative;">
                         <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
-                        <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                        <span class="password-toggle" onclick="togglePassword()">
+						    <img src="/images/icon/닫힌눈.png" width="30">
+						</span>
                     </div>
                 </div>
                 
@@ -313,24 +315,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggle = document.querySelector('.password-toggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggle.textContent = '🙈';
-            } else {
-                passwordInput.type = 'password';
-                toggle.textContent = '👁️';
-            }
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggle = document.querySelector('.password-toggle');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggle.innerHTML = '<img src="/images/icon/뜬눈.png" width="30">';
+        } else {
+            passwordInput.type = 'password';
+            toggle.innerHTML = '<img src="/images/icon/닫힌눈.png" width="30">';
         }
+    }
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+        });
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            const userId = document.getElementById('userId').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!userId) {
+                alert('아이디를 입력해주세요.');
+                e.preventDefault();
+                return;
+            }
+
+            if (!password) {
+                alert('비밀번호를 입력해주세요.');
+                e.preventDefault();
+                return;
             }
         });
     </script>
