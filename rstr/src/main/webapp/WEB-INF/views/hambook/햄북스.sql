@@ -32,8 +32,8 @@ SET latitude = 37.28648227941,
 WHERE id = 1;
 
 UPDATE REVIEW
-SET REVIEWIMAGE = '/resources/images/26s1.gif,/resources/images/26s2.jpg,/resources/images/26s3.jpg'
-WHERE id = '19';
+SET REVIEWIMAGE = '/resources/images/churros.jpg,/resources/images/churros2.jpg,/resources/images/churros3.jpg'
+WHERE id = '1';
 INSERT INTO REVIEW
 			   VALUES ('16', '바삭 돈까스', '여태까지 먹은 돈까스는 가짜였어요!', '16', '16','' ,'5',SYSDATE, 592,'','');
 SELECT * FROM RESTAURANT;
@@ -75,3 +75,8 @@ FROM review
 WHERE id BETWEEN 1 AND 5
 ORDER BY created_at DESC;
 SELECT * FROM RESTAURANT;
+
+SELECT * FROM menu WHERE restaurant_id = 2;
+UPDATE menu 
+SET image_path = '/images/2/menu/88e1da3d-b48d-4026-a4c0-def2fa42cfde.jpg'
+WHERE restaurant_id = 2;
