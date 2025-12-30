@@ -193,13 +193,7 @@
 <h2 style="text-align:center;">현재 지역의 맛집🍖🍖<h2>
 <div id="map" style="width:70%; height:600px;  margin:50px auto; border:5px solid black; align-items:center;"></div>
 <!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">
-            Copyright &copy; HamBooks 2025
-        </p>
-    </div>
-</footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <!-- Bootstrap core JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

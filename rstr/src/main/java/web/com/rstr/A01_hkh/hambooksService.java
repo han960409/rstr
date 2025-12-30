@@ -75,5 +75,8 @@ public class hambooksService {
     public void signup(MemberVO vo) {
         dao.insertMember(vo);
     }
+    public List<Restaurant> getAllRestaurant() {
+        return dao.selectAllRestaurant();
+    }
 
 }

@@ -146,6 +146,7 @@ SELECT * FROM MEMBER;
 SELECT * FROM USERS;
 DROP TABLE MEMBER;
 SELECT * FROM review;
+SELECT * FROM RESTAURANT;
 ALTER TABLE REVIEW
 DROP COLUMN receive_recommend;
 -- ============================================
@@ -163,7 +164,7 @@ INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '파스타존', '10:30~22
 INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '치킨천국', '16:00~02:00', '치킨', '수원시 팔달구', '수원', '031-444-5555', '바삭한 치킨', CURRENT_TIMESTAMP,0);
 INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '카페모닝', '08:00~20:00', '카페', '수원시 장안구 수원KT위즈파크 앞', '수원', '031-555-6666', '브런치 카페', CURRENT_TIMESTAMP,0);
 
-UPDATE restaurant SET receive_recommend = 0 WHERE id = 15;
+UPDATE restaurant SET receive_recommend = 360 WHERE id = 26;
 SELECT id, receive_recommend
 FROM restaurant
 WHERE id = 15;
