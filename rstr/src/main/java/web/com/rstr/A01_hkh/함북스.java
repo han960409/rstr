@@ -113,17 +113,6 @@ public class 함북스 {
         return "hambook/review_king";
     }
 
-    // http://localhost:6805/areaplus
-    @GetMapping("areaplus")
-    public String areaplus() {
-        return "hambook/Areaplus";
-    }
-
-    // http://localhost:6805/list
-    @GetMapping("list")
-    public String list() {
-        return "hambook/Restaurant_list";
-    }
     // http://localhost:6805/signup
     @GetMapping("/signup")
     public String signupForm() {
