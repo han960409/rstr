@@ -29,30 +29,10 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <style>
-    header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
-        transition: all 0.3s ease;
-    }
 
-    header.scrolled {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 80px;
-    }
-
+        body {
+            background-color: #FFF5E6;
+        }
     .logo {
         display: flex;
         align-items: center;
@@ -113,45 +93,31 @@
 html {
     scroll-behavior: smooth;
 }
+.btn-custom {
+    background-color: #f97316; 
+    color: white;             
+    border: none;             
+}
+.custom{
+    background-color: #f97316; 
+    color: white;             
+    border: none;
+}
+.btn-custom:hover {
+    background-color: #e65c00; 
+    color: white;
+}
 </style>
 
 <body>
-<header id="header">
-    <div class="header-container">
-        <a href="http://localhost:6805/home" class="logo">
-            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
-        </a>
-        
-        <nav class="nav-menu">
-            <a href="http://localhost:6805/home" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span>Home</span>
-            </a>
-            <a href="http://localhost:6805/login" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>Login</span>
-            </a>
-        </nav>
-    </div>
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!-- Header -->
-<h2 class="py-5">
+<h2 class="py-2 text-center"> <!-- py-2로 위아래 패딩 줄임, text-center로 가운데 정렬 -->
     <div class="container px-lg-5">
-        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+        <div class="p-4 p-lg-5 bg-light rounded-3">
             <div class="m-4 m-lg-5">
-                <h1 class="display-5 fw-bold">함북스(HamBooks)</h1>
-                <p class="fs-4">
-                    함북스는 ‘햄버거’를 의미하는 유행어 ‘함부기’에서 착안한
-                    ‘함(ham)’과 예약을 뜻하는 ‘books’의 조합으로 탄생한 브랜드입니다.
-                    사용자들의 평점 데이터를 기반으로 한 맛집 랭킹 서비스와
-                    빠르고 간편한 예약 기능을 제공하여,
-                    더 즐겁고 스마트한 외식 경험을 제공합니다.
-                </p>
-                <a class="btn btn-primary btn-lg" href="#menuSection">메뉴 살펴보기</a>
+                <img src="${pageContext.request.contextPath}/resources/images/hambooksLogo.jpg" class="img-fluid mx-auto d-block">
+                <a class="btn btn-custom btn-lg mt-3" href="#menuSection">메뉴 살펴보기</a>
             </div>
         </div>
     </div>
@@ -169,7 +135,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/경주.jpg" class="d-block mx-auto" width="400px" height="200px">
    			   <div class="card bg-light border-0">
      			     <div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           </div>
  			             <h2 class="fs-4 fw-bold">지역별</h2>
@@ -183,7 +149,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/스테이크.jpg" class="d-block mx-auto" width="400px" height="200px">
    			   <div class="card bg-light border-0">
      			     <div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           </div>
  			             <h2 class="fs-4 fw-bold">음식 종류별</h2>
@@ -197,7 +163,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/왕관.jpg" class="d-block mx-auto" width="400px" height="200px">
    			 	<div class="card bg-light border-0">
      			  	<div class="card-body text-center p-4 p-lg-5 pt-0">
-    			        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			        <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			          	</div>
  			            <h2 class="fs-4 fw-bold">리뷰 명예의 전당</h2>
@@ -211,7 +177,7 @@ html {
   			<img src="${pageContext.request.contextPath}/resources/images/크리스마스.jpg" class="d-block mx-auto" width="400px" height="200px"> 
    			   		<div class="card bg-light border-0">
      			     	<div class="card-body text-center p-4 p-lg-5 pt-0">
-    			          <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4">
+    			          <div class="feature custom bg-gradient text-white rounded-3 mb-4 mt-n4">
      			             <i class="bi bi-collection"></i>
    			           	  </div>
  			            <h2 class="fs-4 fw-bold">테마별</h2>
@@ -228,14 +194,7 @@ html {
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">
-            Copyright &copy; HamBooks 2025
-        </p>
-    </div>
-</footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <!-- Bootstrap core JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -251,6 +210,7 @@ window.addEventListener('scroll', () => {
         header.classList.remove('scrolled');
     }
 });
+
 </script>
 </body>
 </html>

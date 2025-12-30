@@ -113,12 +113,12 @@ ALTER TABLE restaurant ADD receive_recommend NUMBER;
 */
 SELECT 
 -- 댓글 테이블
-CREATE TABLE comments (
+CREATE TABLE COMMENTS (
     id NUMBER PRIMARY KEY,
     body CLOB NOT NULL,
-    user_id NUMBER NOT NULL,
+    user_id VARCHAR2(50) NOT NULL,
     review_id NUMBER NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 리뷰 추천 테이블
@@ -143,11 +143,12 @@ CREATE TABLE MEMBER (
 	PHONE VARCHAR2(50)
 );
 SELECT * FROM MEMBER;
-SELECT * FROM USERS;
-DROP TABLE MEMBER;
+SELECT * FROM COMMENTS;
+DROP TABLE COMMENTS;
 SELECT * FROM review;
+SELECT * FROM RESTAURANT;
 ALTER TABLE REVIEW
-DROP COLUMN receive_recommend;
+ADD COMMENTBODY VARCHAR2(100);
 -- ============================================
 -- 샘플 데이터
 -- ============================================
@@ -163,10 +164,10 @@ INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '파스타존', '10:30~22
 INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '치킨천국', '16:00~02:00', '치킨', '수원시 팔달구', '수원', '031-444-5555', '바삭한 치킨', CURRENT_TIMESTAMP,0);
 INSERT INTO restaurant VALUES (restaurant_seq.NEXTVAL, '카페모닝', '08:00~20:00', '카페', '수원시 장안구 수원KT위즈파크 앞', '수원', '031-555-6666', '브런치 카페', CURRENT_TIMESTAMP,0);
 
-UPDATE restaurant SET receive_recommend = 0 WHERE id = 15;
-SELECT id, receive_recommend
-FROM restaurant
-WHERE id = 15;
+UPDATE restaurant SET receive_recommend = 360 WHERE id = 26;
+SELECT * 
+FROM menu
+WHERE restaurant_id = 26;
 DROP TABLE menu;
 
 INSERT INTO menu VALUES (menu_seq.NEXTVAL, '불고기 정식', 12000, 1, NULL, '대표 메뉴', CURRENT_TIMESTAMP);

@@ -22,8 +22,20 @@ public class Review {
 	private String pfImage;					/* 프로필 이미지 */
 	private List<String> reviewImageList;	/* 가게 리뷰 이미지*/
 	private String reviewImage;
+	private List<Comment> commentList;
 	
-	
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+	public int getReceiveRecommend() {
+		return receiveRecommend;
+	}
+	public void setReceiveRecommend(int receiveRecommend) {
+		this.receiveRecommend = receiveRecommend;
+	}
 	public List<String> getReviewImageList() {
 		return reviewImageList;
 	}
@@ -39,7 +51,7 @@ public class Review {
 	}
 	public Review(int id, String title, String body, int restaurantId, int userId, int userVisitId,
 			LocalDateTime timeStamp, @DecimalMin("0.5") @DecimalMax("5.0") BigDecimal rating, int receiveRecommend,
-			String pfImage, List<String> reviewImageList, String reviewImage) {
+			String pfImage, List<String> reviewImageList, String reviewImage, List<Comment> commentList) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -53,6 +65,7 @@ public class Review {
 		this.pfImage = pfImage;
 		this.reviewImageList = reviewImageList;
 		this.reviewImage = reviewImage;
+		this.commentList = commentList;
 	}
 	public int getId() {
 		return id;

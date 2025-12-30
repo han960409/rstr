@@ -9,86 +9,16 @@
     <title>함북스>${rstrName}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    	header {
-        position: sticky;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
-        transition: all 0.3s ease;
-    }
-
-    header.scrolled {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 80px;
-    }
-
-
-
-    .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    .nav-link {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #374151;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-        color: #f97316;
-    }
-
-    .nav-link svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    @media (max-width: 768px) {
-        .header-container {
-            height: 64px;
-        }
-
-        .nav-menu {
-            gap: 1rem;
-        }
-        .nav-link {
-            gap: 0.25rem;
-            font-size: 0.875rem;
-        }
-        .nav-link svg {
-            width: 20px;
-            height: 20px;
-        }
-    }
         body {
-            background-color: #FFFFE9;
+            background-color: #FFF5E6;
         }
         .main-image-box {
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             overflow: hidden;
         }
 		.main-image-box img {
@@ -97,9 +27,9 @@
 		    object-fit: contain;
 		}
         .thumbnail-box {
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             height: 80px;
-            border: 2px solid #dee2e6;
+            border: 2px solid #FFD7A8;
             cursor: pointer;
             overflow: hidden;
             display: flex;
@@ -113,16 +43,16 @@
             object-fit: cover;
         }
         .thumbnail-box:hover {
-            border-color: #0d6efd;
+            border-color: #FF8C42;
             transform: scale(1.05);
         }
         .thumbnail-box.active {
-            border-color: #0d6efd;
+            border-color: #FF8C42;
             border-width: 3px;
         }
         .menu-item {
             background-color: white;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             padding: 15px;
             margin-bottom: 15px;
             display: flex;
@@ -131,7 +61,8 @@
             transition: all 0.3s;
         }
         .menu-item:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(255, 140, 66, 0.2);
+            border-color: #FFB380;
         }
         .menu-img {
             width: 100px;
@@ -159,19 +90,20 @@
         .menu-price {
             font-size: 1.1rem;
             font-weight: bold;
-            color: #0d6efd;
+            color: #FF8C42;
         }
         .info-box {
             background-color: white;
-            border: 1px solid #dee2e6;
+            border: 1px solid #FFD7A8;
             padding: 20px;
             margin-bottom: 15px;
+            border-radius: 8px;
         }
         .tag-box {
             display: inline-block;
             padding: 5px 15px;
             margin: 5px;
-            background-color: #e9ecef;
+            background-color: #FFE4C4;
             border-radius: 20px;
         }
         .review-profile-img {
@@ -179,7 +111,7 @@
             height: 50px;
             border-radius: 4px;
             object-fit: cover;
-            border: 2px solid #dee2e6;
+            border: 2px solid #FFD7A8;
             flex-shrink: 0;
         }
         .review-item {
@@ -187,34 +119,38 @@
             gap: 15px;
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #FFE4C4;
         }
         .review-content {
             flex: 1;
         }
+        .btn-primary {
+            background-color: #FF8C42;
+            border-color: #FF8C42;
+        }
+        .btn-primary:hover {
+            background-color: #FF7526;
+            border-color: #FF7526;
+        }
+        .btn-outline-primary {
+            color: #FF8C42;
+            border-color: #FF8C42;
+        }
+        .btn-outline-primary:hover {
+            background-color: #FF8C42;
+            border-color: #FF8C42;
+            color: white;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(255, 140, 66, 0.1);
+        }
     </style>
 </head>
 <body>
-<header id="header">
-    <div class="header-container">
-        <a href="http://localhost:6805/home" class="logo"><img src = "/images/icon/logo.png" width = "180px" height = "50px"></a>
-        
-        <nav class="nav-menu">
-            <a href="/" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span>Home</span>
-            </a>
-            <a href="/login" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>Login</span>
-            </a>
-        </nav>
-    </div>
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
     
 <div class="container mt-4">
         <h2 class="mb-4">${rstrName}</h2>
@@ -235,14 +171,15 @@
                 <div class="row g-2 mb-4">
                     <c:forEach var="img" items="${images}" varStatus="status">
                         <div class="col-2">
-                            <div class="thumbnail-box ${status.first ? 'active' : ''}" onclick="changeImage(this, ${status.index})">
+                            <div class="thumbnail-box ${status.first ? 'active' : ''}" 
+                                 data-img-url="${pageContext.request.contextPath}${img.imgUrl}">
                                 <img src="${pageContext.request.contextPath}${img.imgUrl}" alt="썸네일 ${status.count}">
                             </div>
                         </div>
                     </c:forEach>
                 </div>
                 
- <div class="info-box">
+                <div class="info-box">
                     <h5 class="mb-4"><img src ="\images\icon\메뉴 아이콘.png" width = "48px", height = "40px"> 메뉴</h5>
                     
                     <c:choose>
@@ -408,64 +345,38 @@
         </div>
     </div>
     
-	<footer class="py-5 bg-dark">
-	    <div class="container">
-	        <p class="m-0 text-center text-white">
-	            Copyright &copy; HamBooks 2025
-	        </p>
-	    </div>
-	</footer>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    const images = [
-        <c:forEach var="img" items="${images}" varStatus="status">
-            '${pageContext.request.contextPath}${img.imgUrl}'${!status.last ? ',' : ''}
-        </c:forEach>
-    ];
-    
-    // 썸네일 클릭 시 실행되는 함수
-    function changeImage(element, index) {
-        const mainImage = document.querySelector('#mainImage img');
-        
-        // 클릭한 인덱스에 해당하는 이미지 주소로 메인 이미지 소스 변경
-        mainImage.src = images[index];
-        
-        // 모든 썸네일에서 active 클래스 제거 (파란 테두리 제거)
-        document.querySelectorAll('.thumbnail-box').forEach(thumb => {
-            thumb.classList.remove('active');
-        });
-        
-        // 클릭한 썸네일에만 active 클래스 추가 (파란 테두리 추가)
-        element.classList.add('active');
-    }
-        // 평균 평점 및 리뷰 수 계산 함수 (예시)
-        function updateReviewStats() {
-            // 실제로는 서버에서 데이터를 받아와야 합니다
-            const reviews = [
-                { rating: 4 },
-                { rating: 5 },
-                { rating: 4 }
-            ];
-            
-            // 평균 평점 계산
-            const avgRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
-            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
-            
-            // 리뷰 수
-            document.getElementById('reviewCount').textContent = reviews.length;
-        }
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.querySelectorAll('.thumbnail-box').forEach(function(thumbnail) {
+                thumbnail.addEventListener('click', function() {
+                    const imgUrl = this.getAttribute('data-img-url');
+                    const mainImage = document.querySelector('#mainImage img');
+                    mainImage.src = imgUrl;
+
+                    document.querySelectorAll('.thumbnail-box').forEach(thumb => {
+                        thumb.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                });
+            });
+
+            const header = document.getElementById('header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 20) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
             }
         });
-        
-        // 페이지 로드 시 실행
-        // updateReviewStats();
     </script>
 </body>
 </html>

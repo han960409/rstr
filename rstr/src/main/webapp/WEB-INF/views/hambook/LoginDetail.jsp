@@ -161,6 +161,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.2rem;
+            z-index: 1;
         }
         
         .input-icon input {
@@ -178,6 +179,7 @@
             transform: translateY(-50%);
             cursor: pointer;
             font-size: 1.2rem;
+            z-index: 2;
         }
         
         .form-check {
@@ -236,6 +238,17 @@
             color: #D85A20;
             text-decoration: underline;
         }
+        
+        .alert {
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-danger {
+            background-color: #fee2e2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
     </style>
 </head>
 <body>
@@ -243,7 +256,7 @@
 <header id="header">
     <div class="header-container">
         <a href="http://localhost:6805/home" class="logo">
-            <img src="/images/icon/logo.png" width="180px" height="50px">
+            <img src="/images/icon/logo.png" width="180px" height="50px" alt="HamBooks 로고">
         </a>
         
         <nav class="nav-menu">
@@ -269,23 +282,44 @@
             <h1 class="login-title">HAMBOOKS</h1>
             <p class="login-subtitle">맛집을 읽다, 예약을 잇다</p>
             
-            <form>
+            <!-- 에러 메시지 표시 -->
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>⚠️ ${error}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </c:if>
+            
+            <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="mb-3">
                     <div class="input-icon">
-                        <input type="text" class="form-control" placeholder="아이디를 입력하세요">
+                        <input type="text" 
+                               class="form-control" 
+                               id="userId" 
+                               name="userId" 
+                               value="${userId}"
+                               placeholder="아이디를 입력하세요"
+                               required>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <div class="input-icon password-icon" style="position: relative;">
-                        <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
-                        <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                        <input type="password" 
+                               class="form-control" 
+                               id="password" 
+                               name="password" 
+                               placeholder="비밀번호를 입력하세요"
+                               required>
+                        <span class="password-toggle" onclick="togglePassword()">
+                            <img src="/images/icon/닫힌눈.png" width="30" alt="비밀번호 보기">
+                        </span>
                     </div>
                 </div>
                 
                 <div class="clearfix">
                     <div class="form-check float-start">
-                        <input class="form-check-input" type="checkbox" id="remember">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
                         <label class="form-check-label" for="remember">
                             로그인 상태 유지
                         </label>
@@ -313,26 +347,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggle = document.querySelector('.password-toggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggle.textContent = '🙈';
-            } else {
-                passwordInput.type = 'password';
-                toggle.textContent = '👁️';
-            }
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggle = document.querySelector('.password-toggle');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggle.innerHTML = '<img src="/images/icon/뜬눈.png" width="30" alt="비밀번호 숨기기">';
+        } else {
+            passwordInput.type = 'password';
+            toggle.innerHTML = '<img src="/images/icon/닫힌눈.png" width="30" alt="비밀번호 보기">';
         }
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    }
+    
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // 클라이언트 측 유효성 검사
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        const userId = document.getElementById('userId').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!userId) {
+            alert('아이디를 입력해주세요.');
+            e.preventDefault();
+            document.getElementById('userId').focus();
+            return false;
+        }
+
+        if (!password) {
+            alert('비밀번호를 입력해주세요.');
+            e.preventDefault();
+            document.getElementById('password').focus();
+            return false;
+        }
+    });
     </script>
 </body>
 </html>

@@ -74,3 +74,14 @@ SELECT *
 FROM review
 WHERE id BETWEEN 1 AND 5
 ORDER BY created_at DESC;
+SELECT * FROM RESTAURANT;
+
+SELECT * FROM menu WHERE restaurant_id = 2;
+UPDATE menu 
+SET image_path = '/images/2/menu/88e1da3d-b48d-4026-a4c0-def2fa42cfde.jpg'
+WHERE restaurant_id = 2;
+
+SELECT * FROM reservation;
+
+ALTER TABLE RESERVATION
+DROP COLUMN special_request;

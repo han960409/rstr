@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
@@ -69,11 +70,43 @@ public class hambooksService {
 
         return review;
     }
+    public Review getReviewWithComments(int reviewId) {
+        Review review = dao.findReviewById(reviewId);
+
+        if (review != null) {
+            // 리뷰 이미지 처리
+            if (review.getReviewImage() != null && !review.getReviewImage().isEmpty()) {
+                review.setReviewImageList(
+                    Arrays.asList(review.getReviewImage().split(","))
+                );
+            }
+            // 댓글 포함
+            List<Comment> comments = dao.findCommentsByReviewId((long) reviewId);
+            review.setCommentList(comments);
+        }
+
+        return review;
+    }
     public List<Review> getReviewsByRestaurantId(int restaurantId) {
         return dao.findReviewsByRestaurantId(restaurantId);
     }
     public void signup(MemberVO vo) {
         dao.insertMember(vo);
+    }
+    public List<Restaurant> getAllRestaurant() {
+    	
+        return dao.getAllRestaurant();
+    }
+    public Restaurant findById(int id) {
+        return dao.findById(id);
+    }
+    public List<Comment> getCommentsByReviewId(Long reviewId) {
+        return dao.findCommentsByReviewId(reviewId);
+    }
+
+    /* 댓글 작성 */
+    public void addComment(Comment comment) {
+        dao.insertComment(comment);
     }
 
 }

@@ -1,9 +1,5 @@
-<%@ page language="java"
-    contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c"
-    uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,337 +8,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>리뷰 상세 페이지</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-          href="${pageContext.request.contextPath}/assets/B_favicon.ico" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-	
-    <!-- Core theme CSS -->
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/B_favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/B_styles.css" rel="stylesheet" />
     
+    <style>
+        /* 캐러셀 이미지 영역 고정 */
+        .carousel-item { width: 100%; height: 500px; background-color: #f8f9fa; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 썸네일 스타일 */
+        .thumb-img {
+            width: 80px; height: 60px; object-fit: cover; cursor: pointer;
+            opacity: 0.5; transition: all 0.2s ease; border: 2px solid transparent;
+        }
+        .thumb-img:hover { opacity: 1; }
+        .active-thumb { border: 2px solid #0d6efd !important; opacity: 1 !important; transform: scale(1.05); }
+
+        /* 기타 레이아웃 */
+        .logo img { width: 180px; height: 50px; object-fit: contain; }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+    </style>
 </head>
-<style>
-.carousel-item {
-    width: 760px;
-    height: 500px;
-}
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 핵심 */
-}
-    header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
-        transition: all 0.3s ease;
-    }
-
-    header.scrolled {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 80px;
-    }
-
-    .logo {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-    }
-
-    .logo img {
-        width: 180px;
-        height: 50px;
-        object-fit: contain;
-    }
-
-    .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    .nav-link {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #374151;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-        color: #f97316;
-    }
-
-    .nav-link svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    @media (max-width: 768px) {
-        .header-container {
-            height: 64px;
-        }
-        .logo img {
-            width: 140px;
-            height: 40px;
-        }
-        .nav-menu {
-            gap: 1rem;
-        }
-        .nav-link {
-            gap: 0.25rem;
-            font-size: 0.875rem;
-        }
-        .nav-link svg {
-            width: 20px;
-            height: 20px;
-        }
-    }
-.thumb-img {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    cursor: pointer;
-    opacity: 0.6;
-}
-
-.thumb-img:hover {
-    opacity: 1;
-}
-
-.active-thumb {
-    border: 2px solid #0d6efd;
-    opacity: 1;
-}
-</style>
-<header id="header">
-    <div class="header-container">
-        <a href="http://localhost:6805/home" class="logo">
-            <img src="${pageContext.request.contextPath}/resources/images/hambooks.png" width="180px" height="50px">
-        </a>
-        
-        <nav class="nav-menu">
-            <a href="http://localhost:6805/home" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span>Home</span>
-            </a>
-            <a href="http://localhost:6805/login" class="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>Login</span>
-            </a>
-        </nav>
-    </div>
-</header>
-<br>
 <body>
-        <!-- Responsive navbar-->
-
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <div class="container mt-5">
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Post content-->
-                    <c:forEach var="review" items="${reviews}">
-                    <article class="mb-5 border-bottom pb-4">
-                        <!-- Post header-->
-                        <h2>
-                            <!-- Post title-->
-                            <h2 class="fw-bolder mb-1">${review.title}</h2>
-                            <!-- Post meta content-->
-                            <div class="text mb-2">작성자 : ${review.userId} | 평점 : ${review.rating}</div>
-                            <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그1</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그2</a>
-                        </h2>
-                        <!-- Preview image figure-->
-                        <!-- Page content-->
-<c:if test="${not empty review.reviewImageList}">
-<div id="demo${review.id}" class="carousel slide" data-bs-ride="carousel">
+    <div class="row">
+        <!-- 리뷰 영역 -->
+        <div class="col-lg-8">
+            <c:forEach var="review" items="${reviews}">
+                <article class="mb-5 border-bottom pb-4">
+                    <header class="mb-4">
+                        <h2 class="fw-bolder mb-1">${review.title}</h2>
+                        <div class="text-muted fst-italic mb-2">작성자: ${review.userId} | 평점: ${review.rating}</div>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그1</a>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">태그2</a>
+                    </header>
 
-  <!-- Indicators -->
-  <div class="carousel-indicators">
-    <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
-      <button type="button"
-              data-bs-target="#demo${review.id}"
-              data-bs-slide-to="${status.index}"
-              class="${status.first ? 'active' : ''}">
-      </button>
-    </c:forEach>
-  </div>
+                    <!-- 리뷰 이미지 캐러셀 -->
+                    <c:if test="${not empty review.reviewImageList}">
+                        <div class="review-carousel-container mb-4">
+                            <div id="demo${review.id}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner rounded">
+                                    <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
+                                        <div class="carousel-item ${status.first ? 'active' : ''}">
+                                            <img src="${pageContext.request.contextPath}${img}" class="d-block w-100" alt="리뷰이미지">
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#demo${review.id}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#demo${review.id}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                            </div>
 
-  <!-- Slides -->
-  <div class="carousel-inner">
-    <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
-      <div class="carousel-item ${status.first ? 'active' : ''} text-center">
-        <img src="${pageContext.request.contextPath}${img}"
-             class="d-block mx-auto img-fluid">
-      </div>
-    </c:forEach>
-  </div>
+                            <div class="thumb-wrapper d-flex justify-content-center mt-3 gap-2">
+                                <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
+                                    <img src="${pageContext.request.contextPath}${img}"
+                                         class="img-thumbnail thumb-img ${status.first ? 'active-thumb' : ''}"
+                                         data-bs-target="#demo${review.id}"
+                                         data-bs-slide-to="${status.index}">
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </c:if>
 
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button"
-          data-bs-target="#demo${review.id}" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-
-  <button class="carousel-control-next" type="button"
-          data-bs-target="#demo${review.id}" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-
-</div>
-
-<!-- Thumbnail navigation -->
-<div class="d-flex justify-content-center mt-3 gap-2">
-  <c:forEach var="img" items="${review.reviewImageList}" varStatus="status">
-    <img src="${pageContext.request.contextPath}${img}"
-         class="img-thumbnail thumb-img ${status.first ? 'active-thumb' : ''}"
-         data-bs-target="#demo${review.id}"
-         data-bs-slide-to="${status.index}">
-  </c:forEach>
-</div>
-</c:if>
-<!-- Post content-->
-<section class="mb-5">
-<p class="fs-5 mb-4">${review.body}</p>
-
-                        </section>
-                    </article>
-                    </c:forEach>
-                    <!-- Comments section-->
                     <section class="mb-5">
-                        <div class="card bg-light">
-                            <div class="card-body">
-                                <!-- Comment form-->
-                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="로그인 후 댓글 작성이 가능합니다."></textarea></form>
-                                <!-- Comment with nested comments-->
-                                <div class="d-flex mb-4">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">닉네임</div>
-                                        댓글
-                                        <!-- Child comment 1-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">닉네임</div>
-                                                대댓글
-                                                </div>
-                                        </div>
-                                        <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">닉네임</div>
-                                                대댓글
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single comment-->
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">닉네임</div>
-                                        댓글
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="fs-5 mb-4">${review.body}</p>
                     </section>
-                </div>
-                <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">검색</div>
-                        <div class="card-body">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="검색 할 내용을 입력하세요." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                            </div>
-                        </div>
+
+                    
+                    <section class="mb-5">
+                      <c:choose>
+
+<c:when test="${not empty sessionScope.user}">
+    <div class="card bg-light">
+        <div class="card-body">
+<form action="${pageContext.request.contextPath}/review/addComment" method="post" class="mb-4">
+    <input type="hidden" name="reviewId" value="${review.id}" />
+    <input type="hidden" name="userId" value="${sessionScope.user.userId}" /> <!-- 로그인 유저 아이디 -->
+    <div class="mb-3">
+        <textarea class="form-control" name="body" rows="3" placeholder="댓글을 작성해주세요." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">등록</button>
+</form>
+
+            <!-- 댓글 출력 -->
+            <c:forEach var="comment" items="${review.commentList}">
+                <div class="d-flex mb-3">
+                    <div class="flex-shrink-0">
+                        <img class="rounded-circle" src="${pageContext.request.contextPath}${comment.userProfile}" width="50" height="50" alt="프로필 이미지" />
                     </div>
-                <!-- Categories widget-->
-<div class="card mb-4">
-    <div class="card-header">리뷰의 가게 정보</div>
-    <div class="card-body">
-        <div class="row">
-            <div>
-                <ul class="list-unstyled">
-                    <li>${restaurant.restaurantName}</li>
-                    <br>
-                    <li>🕕 영업시간 : ${restaurant.operatingHours}</li>
-                    <li>🚩 주소 : ${restaurant.address}</li>
-                    <li>📞 전화번호 : ${restaurant.phone}</li>
-                </ul>
+                    <div class="ms-3">
+                        <div class="fw-bold">${comment.userId}</div>
+                        ${comment.body}
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</c:when>
+
+
+    <c:otherwise>
+        <div class="alert alert-info">
+            댓글을 작성하려면 <a href="${pageContext.request.contextPath}/login">로그인</a>이 필요합니다.
+        </div>
+    </c:otherwise>
+</c:choose>
+
+                    </section>
+
+                </article>
+            </c:forEach>
+        </div>
+
+        <!-- 사이드바 -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">검색</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="검색어 입력..." />
+                        <button class="btn btn-primary" type="button">Go!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">가게 정보</div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="fw-bold fs-5">
+                            <a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}" 
+                               style="text-decoration: none; color: inherit;">
+                                ${restaurant.restaurantName}
+                            </a>
+                        </li>
+                        <hr>
+                        <li>🕕 영업시간 : ${restaurant.operatingHours}</li>
+                        <li>🚩 주소 : ${restaurant.address}</li>
+                        <li>📞 전화번호 : ${restaurant.phone}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; HamBooks 2025</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/B_scripts.js"></script>
-    </body>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-document.querySelectorAll('.carousel').forEach(carousel => {
-
-    // 해당 캐러셀 바로 아래 썸네일들만 찾기
-    const thumbs = carousel
-        .nextElementSibling
-        .querySelectorAll('.thumb-img');
-
-    carousel.addEventListener('slid.bs.carousel', function (e) {
-        thumbs.forEach(t => t.classList.remove('active-thumb'));
-        thumbs[e.to].classList.add('active-thumb');
+document.addEventListener('DOMContentLoaded', function() {
+    // 캐러셀 썸네일 연동
+    const carousels = document.querySelectorAll('.carousel');
+    carousels.forEach(carousel => {
+        carousel.addEventListener('slid.bs.carousel', function (e) {
+            const container = e.target.closest('.review-carousel-container');
+            const thumbs = container.querySelectorAll('.thumb-img');
+            thumbs.forEach(thumb => thumb.classList.remove('active-thumb'));
+            if (thumbs[e.to]) thumbs[e.to].classList.add('active-thumb');
+        });
     });
-});
 
-// header 스크롤 효과 (기존 그대로)
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+    // 헤더 스크롤 이벤트
+    const header = document.querySelector('header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
     }
 });
+
 </script>
+</body>
 </html>

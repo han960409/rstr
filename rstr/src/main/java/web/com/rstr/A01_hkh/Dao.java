@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
 import web.com.rstr.common.dto.Review;
@@ -72,10 +73,63 @@ public interface Dao {
     	List<Review> findReviewsByRestaurantId(int restaurantId);
 
     @Insert("            INSERT INTO USERS\r\n"
-    		+ "            (ID, USER_ID, PASSWORD, NAME, EMAIL, PHONE)\r\n"
+    		+ "            (ID, USER_ID, PASSWORD, NAME, EMAIL, PHONE ,ROLE)\r\n"
     		+ "            VALUES\r\n"
-    		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone})")
+    		+ "            (USERS_SEQ.NEXTVAL, #{userId}, #{password}, #{name}, #{email}, #{phone}, #{role})")
     int insertMember(MemberVO vo);
 
-    
+   @Select("    SELECT\r\n"
+   		+ "        ID               AS id,\r\n"
+   		+ "        RESTAURANT_NAME  AS restaurantName,\r\n"
+   		+ "        CATEGORY         AS category,\r\n"
+   		+ "        ADDRESS          AS address,\r\n"
+   		+ "        OPERATING_HOURS AS operatingHours,\r\n " 
+   		+ " 	IMAGE_PATH       AS imagePath \r\n "
+   		+ "    FROM RESTAURANT\r\n"
+   		+ "    ORDER BY RESTAURANT_NAME")
+    List<Restaurant> getAllRestaurant();
+   
+   /**
+    * 로그인: 아이디와 비밀번호로 사용자 조회
+    */
+   @Select("SELECT " +
+           "ID as id, " +
+           "USER_ID as userId, " +
+           "NAME as name, " +
+           "EMAIL as email, " +
+           "PHONE as phone, " +
+           "ROLE as role " +
+           "FROM USERS " +
+           "WHERE USER_ID = #{userId} " +
+           "AND PASSWORD = #{password}")
+   MemberVO selectByUserIdAndPassword(@Param("userId") String userId, 
+                                      @Param("password") String password);
+   
+   /**
+    * 아이디 중복 체크
+    */
+   @Select("SELECT COUNT(*) FROM USERS WHERE USER_ID = #{userId}")
+   int countByUserId(@Param("userId") String userId);
+   
+   /**
+    * 사용자 ID로 조회
+    */
+   @Select("SELECT " +
+           "ID as id, " +
+           "USER_ID as userId, " +
+           "NAME as name, " +
+           "EMAIL as email, " +
+           "PHONE as phone, " +
+           "ROLE as role " +
+           "FROM USERS " +
+           "WHERE ID = #{id}")
+   MemberVO selectById(@Param("id") Long id);
+   @Insert("INSERT INTO comments (id, body, user_id, review_id) " +
+           "VALUES (comment_seq.NEXTVAL, #{body}, #{userId}, #{reviewId})")
+   void insertComment(Comment comment);
+
+   @Select("SELECT id, body, user_id AS userId, review_id AS reviewId, created_at AS createdAt " +
+           "FROM comments WHERE review_id = #{reviewId} ORDER BY created_at ASC")
+   List<Comment> findCommentsByReviewId(Long reviewId);
 }
+
