@@ -349,13 +349,7 @@
     </div>
 </div>
 
-<footer class="py-5 bg-dark mt-5">
-    <div class="container">
-        <p class="m-0 text-center text-white">
-            Copyright &copy; HamBooks 2025
-        </p>
-    </div>
-</footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
