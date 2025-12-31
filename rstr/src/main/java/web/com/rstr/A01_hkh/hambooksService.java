@@ -56,16 +56,19 @@ public class hambooksService {
         return dao.findById(id);
     }
     public Review getReviewById(int id) {
-
         Review review = dao.findReviewById(id);
 
-        if (review != null
-            && review.getReviewImage() != null
-            && !review.getReviewImage().isEmpty()) {
+        if (review != null) {
+            // 이미지 처리
+            if (review.getReviewImage() != null && !review.getReviewImage().isEmpty()) {
+                review.setReviewImageList(
+                    Arrays.asList(review.getReviewImage().split(","))
+                );
+            }
 
-            review.setReviewImageList(
-                Arrays.asList(review.getReviewImage().split(","))
-            );
+            // 🔥 댓글 무조건 포함
+            List<Comment> comments = dao.findCommentsByReviewId((long) review.getId());
+            review.setCommentList(comments != null ? comments : List.of());
         }
 
         return review;
@@ -88,7 +91,31 @@ public class hambooksService {
         return review;
     }
     public List<Review> getReviewsByRestaurantId(int restaurantId) {
-        return dao.findReviewsByRestaurantId(restaurantId);
+
+        List<Review> reviews =
+                dao.findReviewsByRestaurantId(restaurantId);
+
+        for (Review review : reviews) {
+
+            // 이미지 처리
+            if (review.getReviewImage() != null &&
+                !review.getReviewImage().isEmpty()) {
+
+                review.setReviewImageList(
+                    Arrays.asList(review.getReviewImage().split(","))
+                );
+            }
+
+            // 🔥🔥 댓글 세팅 (가장 중요)
+            List<Comment> comments =
+                    dao.findCommentsByReviewId((long) review.getId());
+
+            review.setCommentList(
+                    comments != null ? comments : List.of()
+            );
+        }
+
+        return reviews;
     }
     public void signup(MemberVO vo) {
         dao.insertMember(vo);
@@ -109,5 +136,11 @@ public class hambooksService {
         dao.insertComment(comment);
     }
     
-    
+    public void deleteComment(Long commentId, String userId) {
+        Comment comment = new Comment();
+        comment.setId(commentId);
+        comment.setUserId(userId);
+
+        dao.deleteComment(comment); // ✅ Dao가 Comment 객체 받도록 호출
+    }
 }

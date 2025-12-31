@@ -42,12 +42,12 @@
             <c:forEach var="review" items="${reviews}">
                 <article class="mb-5 border-bottom pb-4">
 
-                    <header class="mb-4">
+                    <h1 class="mb-4">
                         <h2 class="fw-bolder mb-1">${review.title}</h2>
                         <div class="text-muted fst-italic mb-2">
                             작성자: ${review.userId} | 평점: ${review.rating}
                         </div>
-                    </header>
+                    </h1>
 
                     <!-- 리뷰 이미지 -->
                     <c:if test="${not empty review.reviewImageList}">
@@ -97,27 +97,44 @@
 <section>
     <h5 class="mb-3">댓글</h5>
 
-    <c:choose>
-        <c:when test="${empty review.commentList}">
-            <div class="text-muted">아직 댓글이 없습니다.</div>
-        </c:when>
-
-        <c:otherwise>
-            <c:forEach var="comment" items="${review.commentList}">
-                <div class="d-flex mb-3">
-                    <div class="flex-shrink-0">
-                        <img class="rounded-circle"
-                             src="${pageContext.request.contextPath}/images/default-profile.png"
-                             width="45" height="45">
-                    </div>
-                    <div class="ms-3">
-                        <div class="fw-bold">${comment.userId}</div>
-                        ${comment.body}<br>${comment.createdAt}
-                    </div>
+    <!-- 댓글 목록 -->
+<c:choose>
+    <c:when test="${empty review.commentList}">
+        <div class="text-muted">아직 댓글이 없습니다.</div>
+    </c:when>
+    <c:otherwise>
+        <c:forEach var="comment" items="${review.commentList}">
+            <div class="d-flex mb-3">
+                <div class="flex-shrink-0">
+                    <img class="rounded-circle"
+                         src="${pageContext.request.contextPath}/images/default-profile.png"
+                         width="45" height="45">
                 </div>
-            </c:forEach>
-        </c:otherwise>
-    </c:choose>
+                <div class="ms-3 w-100">
+                    <div class="fw-bold d-flex justify-content-between">
+                        <span>${comment.userId}</span>
+
+                        <!-- 🔥 본인 댓글만 삭제 버튼 -->
+                        <c:if test="${sessionScope.user != null && sessionScope.user.userId == comment.userId}">
+                            <form action="${pageContext.request.contextPath}/review/deleteComment"
+                                  method="post" style="display:inline;">
+                                <input type="hidden" name="commentId" value="${comment.id}" />
+                                <input type="hidden" name="reviewId" value="${review.id}" />
+                                <input type="hidden" name="userId" value="${comment.userId}" />
+                                <button class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('댓글을 삭제하시겠습니까?')">
+                                    삭제
+                                </button>
+                            </form>
+                        </c:if>
+                    </div>
+                    <div>${comment.body}</div>
+                    <small class="text-muted">${comment.createdAt}</small>
+                </div>
+            </div>
+        </c:forEach>
+    </c:otherwise>
+</c:choose>
 
     <!-- 로그인 안내 -->
     <c:if test="${empty sessionScope.user}">

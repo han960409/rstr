@@ -1,6 +1,5 @@
 package web.com.rstr.A01_hkh;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
 import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
 import web.com.rstr.common.dto.Restaurant;
@@ -152,6 +152,24 @@ public class 함북스 {
         // ✅ 반드시 review/{id}로
         return "redirect:/review/" + reviewId;
     }
+    
+    @PostMapping("/review/deleteComment")
+    public String deleteComment(
+            @RequestParam Long commentId,
+            @RequestParam Long reviewId,
+            @RequestParam String userId,
+            HttpSession session) {
+
+        MemberVO loginUser = (MemberVO) session.getAttribute("user");
+        if (loginUser == null || !loginUser.getUserId().equals(userId)) {
+            return "redirect:/review/" + reviewId;
+        }
+
+        hambooksService.deleteComment(commentId, userId);
+
+        return "redirect:/review/" + reviewId;
+    }
+    
     // http://localhost:6805/list
     @GetMapping("/list")
     public String restaurantList(Model model) {

@@ -2,6 +2,7 @@ package web.com.rstr.A01_hkh;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -136,5 +137,7 @@ public interface Dao {
    		+ "WHERE review_id = ?\n"
    		+ "ORDER BY created_at ASC")
    List<Comment> findByReviewId(Long reviewId);
+   @Delete("DELETE FROM comments WHERE id = #{id} AND user_id = #{userId}")
+   void deleteComment(Comment comment);
 }
 
