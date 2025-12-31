@@ -159,16 +159,16 @@ public interface Dao {
    // ✅ 현재 공감 수 조회
    @Select("SELECT receive_recommend FROM review WHERE id = #{reviewId}")
    int getReviewRecommendCount(@Param("reviewId") int reviewId);
-// 대표 리뷰 조회
-@Select("SELECT * FROM review WHERE restaurant_id = #{restaurantId} ORDER BY receive_recommend DESC FETCH FIRST 1 ROWS ONLY")
-Review findTopReviewByRestaurantId(int restaurantId);
+   // 대표 리뷰 조회
+   @Select("SELECT * FROM review WHERE restaurant_id = #{restaurantId} ORDER BY receive_recommend DESC FETCH FIRST 1 ROWS ONLY")
+   Review findTopReviewByRestaurantId(int restaurantId);
 
-// restaurant 공감 수 증가
-@Update("UPDATE restaurant SET receive_recommend = receive_recommend + 1 WHERE id = #{restaurantId}")
-int updateRestaurantRecommend(@Param("restaurantId") int restaurantId);
+   // restaurant 공감 수 증가
+   @Update("UPDATE restaurant SET receive_recommend = receive_recommend + 1 WHERE id = #{restaurantId}")
+   int updateRestaurantRecommend(@Param("restaurantId") int restaurantId);
 
-// restaurant 공감 수 조회
-@Select("SELECT receive_recommend FROM restaurant WHERE id = #{restaurantId}")
-int getRestaurantRecommendCount(@Param("restaurantId") int restaurantId);
+   // restaurant 공감 수 조회
+   @Select("SELECT receive_recommend FROM restaurant WHERE id = #{restaurantId}")
+   int getRestaurantRecommendCount(@Param("restaurantId") int restaurantId);
 }
 
