@@ -1,9 +1,11 @@
 package web.com.rstr.A01_hkh;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import web.com.rstr.common.dto.Comment;
@@ -168,6 +171,35 @@ public class 함북스 {
         hambooksService.deleteComment(commentId, userId);
 
         return "redirect:/review/" + reviewId;
+    }
+    
+    @PostMapping("/restaurant/recommend")
+    @ResponseBody
+    public Map<String, Object> recommendRestaurant(@RequestParam int restaurantId, HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 세션에서 로그인한 user 객체 가져오기
+        Object userObj = session.getAttribute("user");
+        if(userObj == null) {
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            return result;
+        }
+
+        // user 객체에서 userId 추출
+        String userId = null;
+        try {
+            userId = (String) userObj.getClass().getMethod("getUserId").invoke(userObj);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "세션 정보에 문제가 있습니다.");
+            return result;
+        }
+
+        int newCount = hambooksService.addRecommend(restaurantId);
+        result.put("success", true);
+        result.put("newCount", newCount);
+        return result;
     }
     
     // http://localhost:6805/list

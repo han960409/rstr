@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
@@ -143,4 +144,29 @@ public class hambooksService {
 
         dao.deleteComment(comment); // ✅ Dao가 Comment 객체 받도록 호출
     }
+    
+    /**
+     * 공감 처리
+     * @param restaurantId : 공감할 가게 ID
+     * @param userId : 로그인한 사용자 ID
+     * @return : 새로운 공감 수, 이미 공감했으면 -1 반환
+     */
+    @Transactional
+    public int addRecommend(int restaurantId) {
+
+        // 1️⃣ restaurantId 기준 대표 리뷰 조회
+        Review review = dao.findTopReviewByRestaurantId(restaurantId); // DAO 필요
+        if (review == null) return -1;
+        int reviewId = review.getId();
+
+        // 2️⃣ review 테이블 공감 수 증가
+        dao.addRecommend(reviewId);
+
+        // 3️⃣ restaurant 테이블 공감 수 증가
+        dao.updateRestaurantRecommend(restaurantId); // DAO 필요
+
+        // 4️⃣ 최종 공감 수 조회 (restaurant 기준)
+        return dao.getRestaurantRecommendCount(restaurantId); // DAO 필요
+    }
+    
 }

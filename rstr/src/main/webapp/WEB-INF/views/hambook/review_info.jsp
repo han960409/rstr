@@ -157,7 +157,8 @@
                     <h5>${restaurant.restaurantName}</h5>
                     <p>${restaurant.address}</p>
                     <p>📞문의번호 : ${restaurant.phone}</p>
-                    <p>👍공감갯수 : ${restaurant.receiveRecommend}
+					<p>👍공감갯수 : <span id="recommendCount">${restaurant.receiveRecommend}</span>
+					<button id="recommendBtn" class="btn btn-sm btn-primary">공감하기</button></p>
                 </div>
             </div>
         </div>
@@ -167,5 +168,24 @@
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const restaurantId = ${restaurant.id};
+    document.getElementById('recommendBtn').addEventListener('click', function() {
+        fetch('${pageContext.request.contextPath}/restaurant/recommend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'restaurantId=' + restaurantId
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                document.getElementById('recommendCount').innerText = data.newCount;
+            } else {
+                alert(data.message || '공감 처리에 실패했습니다.');
+            }
+        })
+        .catch(err => console.error(err));
+    });
+</script>
 </body>
 </html>

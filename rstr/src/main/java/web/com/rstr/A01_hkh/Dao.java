@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import web.com.rstr.common.dto.Comment;
 import web.com.rstr.common.dto.MemberVO;
@@ -139,5 +140,35 @@ public interface Dao {
    List<Comment> findByReviewId(Long reviewId);
    @Delete("DELETE FROM comments WHERE id = #{id} AND user_id = #{userId}")
    void deleteComment(Comment comment);
+   
+   // 1️⃣ 사용자가 이미 공감했는지 체크
+   @Select("SELECT COUNT(*) FROM review WHERE restaurant_id = #{restaurantId}")
+   int checkUserRecommend(@Param("restaurantId") int restaurantId);
+
+   // 1️⃣ 공감 수 +1
+   @Update("UPDATE review SET receive_recommend = receive_recommend + 1 WHERE id = #{reviewId}")
+   int addRecommend(@Param("reviewId") int reviewId);
+
+   int checkUserRecommends(int restaurantId, int userId);
+   // ✅ 추가: 현재 공감 수 조회
+   // 3️⃣ Restaurant 테이블 공감수 업데이트
+   // 2️⃣ 리뷰 공감 수 증가
+   @Update("UPDATE review SET receive_recommend = receive_recommend + 1 WHERE id = #{reviewId}")
+   int updateReviewRecommend(@Param("reviewId") int reviewId);
+
+   // ✅ 현재 공감 수 조회
+   @Select("SELECT receive_recommend FROM review WHERE id = #{reviewId}")
+   int getReviewRecommendCount(@Param("reviewId") int reviewId);
+// 대표 리뷰 조회
+@Select("SELECT * FROM review WHERE restaurant_id = #{restaurantId} ORDER BY receive_recommend DESC FETCH FIRST 1 ROWS ONLY")
+Review findTopReviewByRestaurantId(int restaurantId);
+
+// restaurant 공감 수 증가
+@Update("UPDATE restaurant SET receive_recommend = receive_recommend + 1 WHERE id = #{restaurantId}")
+int updateRestaurantRecommend(@Param("restaurantId") int restaurantId);
+
+// restaurant 공감 수 조회
+@Select("SELECT receive_recommend FROM restaurant WHERE id = #{restaurantId}")
+int getRestaurantRecommendCount(@Param("restaurantId") int restaurantId);
 }
 
