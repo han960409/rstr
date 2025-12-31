@@ -156,7 +156,8 @@
                 <div class="card-body">
                     <h5>${restaurant.restaurantName}</h5>
                     <p>${restaurant.address}</p>
-                    <p>${restaurant.phone}</p>
+                    <p>📞문의번호 : ${restaurant.phone}</p>
+                    <p>👍공감갯수 : ${restaurant.receiveRecommend}
                 </div>
             </div>
         </div>
