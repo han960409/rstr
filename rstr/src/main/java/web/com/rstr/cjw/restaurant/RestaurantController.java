@@ -18,7 +18,7 @@ public class RestaurantController {
     private RestaurantService service;
     
     
-    // http://localhost:6805/restaurant/1
+    // http://localhost:6805/restaurant/26
     @GetMapping("/restaurant/{id}")
     public String restaurantDetail(@PathVariable int id, Model d) {
         d.addAttribute("rstrName", service.findRstrNameById(id));

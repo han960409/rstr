@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     private Dao dao;
 
-    // 로그인 페이지
+    // http://localhost:6805/login
     @GetMapping("/login")
     public String login(Model a) {
         return "hambook/LoginDetail";
