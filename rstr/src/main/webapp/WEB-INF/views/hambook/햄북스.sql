@@ -85,3 +85,5 @@ SELECT * FROM reservation;
 
 ALTER TABLE RESERVATION
 DROP COLUMN special_request;
+
+SELECT * FROM USERS;
